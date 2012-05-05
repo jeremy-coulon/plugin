@@ -4,7 +4,13 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
+/** @file */
+
 #pragma once
+
+/**
+  *  @def PLUGIN_API Used to defines a fonction of a dynamic library to be part of the exported library interface.
+  */
 
 #ifdef WIN32
 #define PLUGIN_API __declspec(dllexport)
