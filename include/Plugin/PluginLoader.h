@@ -4,7 +4,41 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
-/** @file */
+/**
+  * @file
+  *
+  * @mainpage
+  * @author Jeremy Coulon
+  * @date 2012
+  *
+  * @section Introduction
+  *
+  * This library provides a portable way of loading/unloading a C++ plugin.\n
+  * The name 'plugin' refers to a dynamic library that is optional and can be loaded and unloaded at runtime.\n
+  * Depending on OS, a plugin may have a different filename extension :
+  * @li on Windows, a plugin has a '.dll' extension. Note that most DLLs are not plugins. A DLL must be designed specifically to be a plugin.
+  * @li on Linux, a plugin usually has a '.so' extension. Note that most .so libraries are not plugins. A library must be designed specifically to be a plugin.
+  *
+  * This library is a header-only library. That means you don't need to compile anything to use it in your own project. You can just write :
+  * @code
+  * #include <Plugin/PluginLoader.h>
+  * @endcode
+  *
+  * This library provides a Plugin::IPlugin interface which can be used as a base interface for your own plugins.\n
+  * You may create your specific plugin interface that inherits from Plugin::IPlugin.\n
+  * Plugin::IPlugin interface depends on the 3rd party Versionning project (https://gitorious.org/cppversionning).\n
+  * However, the use of Plugin::IPlugin is not mandatory and you can use the class Plugin::PluginLoader with your own provided interface type.
+  *
+  * @section License
+  *
+  *          Copyright Jeremy Coulon 2012.\n
+  * Distributed under the Boost Software License, Version 1.0.\n
+  *   (See accompanying file <a href="../LICENSE_1_0.txt">LICENSE_1_0.txt</a> or copy at\n
+  *         http://www.boost.org/LICENSE_1_0.txt)
+  *
+  * @section Examples
+  *
+  */
 
 #pragma once
 
