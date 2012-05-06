@@ -3,3 +3,23 @@ That means you don't need to compile anything to use it in your own project.
 You can just write :
 
 #include <Plugin/PluginLoader.h>
+
+If you want to generate doxygen documentation, go through the following steps:
+
+*) If you have not alread done so, download source code at https://gitorious.org/cppplugin
+*) In the following steps $SOURCE_DIR refers to your local copy of the project
+*) cd $SOURCE_DIR
+*) mkdir build
+*) cd build
+*) cmake -DPlugin_BUILD_DOC:BOOL=TRUE ..
+*) make
+
+Documentation is now available in $SOURCE_DIR/build/share/doc/html/index.html
+
+After generating documentation, if you want to generate a package with both documentation and source code, type
+
+*) cd $SOURCE_DIR/build
+*) make package
+
+An archive file is now available in the current directory.
+For example Plugin_v0.0.1.0.tar.gz.

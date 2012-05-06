@@ -25,6 +25,7 @@ if(DOXYGEN_FOUND)
 	# Doxygen target
         add_custom_target(
             ${PROJECT_NAME}_DOCUMENTATION
+            ALL
             COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Generating API documentation with Doxygen"
@@ -41,6 +42,7 @@ endif()
 install(FILES
     ${PROJECT_SOURCE_DIR}/LICENSE_1_0.txt
     ${PROJECT_SOURCE_DIR}/INSTALL.txt
+    ${PROJECT_SOURCE_DIR}/README.txt
     ${CMAKE_CURRENT_BINARY_DIR}/VERSION.txt
     DESTINATION ${INSTALL_DOC_DIR}
     COMPONENT doc
