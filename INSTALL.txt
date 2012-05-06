@@ -1,0 +1,5 @@
+This library is a header-only library.
+That means you don't need to compile anything to use it in your own project.
+You can just write :
+
+#include <Plugin/PluginLoader.h>

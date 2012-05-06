@@ -1,0 +1,11 @@
+# - Config file for the Plugin package
+# It defines the following variables
+#  Plugin_INCLUDE_DIR - include directory for Plugin
+
+# Compute paths
+get_filename_component(PLUGIN_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+set(Plugin_INCLUDE_DIR 
+    "${PLUGIN_CMAKE_DIR}/@CONF_REL_INCLUDE_DIR@"
+    CACHE PATH "Include directory for Plugin"
+)
