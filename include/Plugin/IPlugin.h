@@ -43,7 +43,7 @@ namespace Plugin
         virtual const std::string& getPluginName() const = 0;
 
         /// Get plugin version
-        virtual const Versionning::Version& getPluginVersion() const = 0;
+        virtual const Vers::Version& getPluginVersion() const = 0;
 
     protected:
         /// Destructor
