@@ -63,8 +63,8 @@ namespace Plugin
 #define PLUGIN_FACTORY_DECLARATION(T)               \
 extern "C"                                          \
 {                                                   \
-T* PLUGIN_API createPluginFacade();                 \
-void PLUGIN_API destroyPluginFacade();              \
+PLUGIN_API T* createPluginFacade();                 \
+PLUGIN_API void destroyPluginFacade();              \
 }
 
 /// Defines fonctions to create and destroy your plugin facade.
