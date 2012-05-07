@@ -183,6 +183,12 @@ namespace Plugin
         }
 
     private:
+
+#ifdef _MSC_VER
+# pragma warning (push)
+# pragma warning (disable: 4191)    // 'reinterpret_cast' : unsafe conversion from 'Plugin::generic_function_ptr' to 'void (__decl*)(void)'
+#endif
+
         template<class R>
         R callFunction(const char* function_name)
         {
@@ -200,6 +206,10 @@ namespace Plugin
             assert(func);
             return (*func)(arg1);
         }
+
+#ifdef _MSC_VER
+# pragma warning (pop)
+#endif
 
 #ifdef WIN32
         bool loadLibrary()
