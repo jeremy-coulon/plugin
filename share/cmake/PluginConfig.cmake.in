@@ -9,3 +9,8 @@ set(Plugin_INCLUDE_DIR
     "${PLUGIN_CMAKE_DIR}/@CONF_REL_INCLUDE_DIR@"
     CACHE PATH "Include directory for Plugin"
 )
+
+mark_as_advanced(
+    Plugin_DIR
+    Plugin_INCLUDE_DIR
+)
