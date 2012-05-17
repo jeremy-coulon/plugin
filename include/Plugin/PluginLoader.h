@@ -19,6 +19,9 @@
   * @li on Windows, a plugin has a '.dll' extension. Note that most DLLs are not plugins. A DLL must be designed specifically to be a plugin.
   * @li on Linux, a plugin usually has a '.so' extension. Note that most .so libraries are not plugins. A library must be designed specifically to be a plugin.
   *
+  * \warning On Linux platform, in order to build an executable (or library) that can dynamically load a plugin you must link your executable (or library) with libdl.so.\n
+  * On Windows platform, you don't need to do anything particular.
+  *
   * This library provides a Plugin::IPlugin interface which can be used as a base interface for your own plugins.\n
   * You may create your specific plugin interface that inherits from Plugin::IPlugin.\n
   * Plugin::IPlugin interface depends on the 3rd party Versionning project (https://gitorious.org/cppversionning).\n
@@ -46,10 +49,10 @@
   * Here we inherits from Plugin::IPlugin but you can write your own interface that may (or may not) inherits from Plugin::IPlugin as well.\n
   * One important thing to don't forget here is to call the macro PLUGIN_FACTORY_DECLARATION(T).\n
   * It creates factory methods that can be called from outside of your dynamic library.\n
-  * This factory implements a Singleton design pattern. There will be only one instance of MyClass during execution of the program.\n
+  * This factory implements a Singleton design pattern. There will be only one instance of MyPlugin during execution of the program.\n
   * \include MyPlugin.h
   *
-  * Implementation of MyClass is straightforward.\n
+  * Implementation of MyPlugin is straightforward.\n
   * The only important thing is to call the macro PLUGIN_FACTORY_DEFINITION(T).\n
   * \include MyPlugin.cpp
   *
@@ -63,13 +66,19 @@
   * It returns a pointer to your plugin interface type.\n
   *
   * And that's all. You can now call any method defined in your interface.\n
+  * \include main.cpp
   *
   * \note Beware that Plugin::PluginLoader::getPluginInterfaceInstance() method does not give you ownership of Plugin::IPlugin pointer.\n
   * It means that this instance will be destroyed as soon as Plugin::PluginLoader is destroyed.\n
   * Any call to the Plugin::IPlugin pointer after Plugin::PluginLoader has been destroyed leads to undefined behavior.\n
   *
-  * \include main.cpp
-  *
+  * If you built the provided example from source (using CMake), you can try it by going to build directory and running the following command : \n
+  * \verbatim ./bin/MyExe ./lib/x86_64-linux-gnu/libMyPlugin.so \endverbatim
+  * Expected program output is : \n
+  \verbatim
+Plugin name    = Example
+Plugin version = 1.3.4.2
+  \endverbatim
   */
 
 #pragma once
