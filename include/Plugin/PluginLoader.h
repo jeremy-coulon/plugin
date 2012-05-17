@@ -73,7 +73,10 @@
   * Any call to the Plugin::IPlugin pointer after Plugin::PluginLoader has been destroyed leads to undefined behavior.\n
   *
   * If you built the provided example from source (using CMake), you can try it by going to build directory and running the following command : \n
+  * On Linux 64 bits platform :
   * \verbatim ./bin/MyExe ./lib/x86_64-linux-gnu/libMyPlugin.so \endverbatim
+  * On Windows Visual Studio 2010 32 bits platform :
+  * \verbatim .\bin\MyExe.exe .\lib\x86-windows-vc100\MyPlugin.dll \endverbatim
   * Expected program output is : \n
   \verbatim
 Plugin name    = Example
