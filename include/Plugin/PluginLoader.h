@@ -40,7 +40,7 @@
   *
   * @section Example
   *
-  * First, create your plugin as a classic dynamic library.\n
+  * First, create your plugin project as a classic dynamic library.\n
   * The following plugin example contains only one class: MyPlugin.\n
   * Your class must inherits from an interface.\n
   * Here we inherits from Plugin::IPlugin but you can write your own interface that may (or may not) inherits from Plugin::IPlugin as well.\n
