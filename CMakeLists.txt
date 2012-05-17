@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_LIST_DIR}/DefaultBuildFlags.cmake)
+
 project(Plugin CXX)
 
 #############
@@ -40,16 +42,22 @@ endif()
 # Following code is enabled only if Versionning is the top level project
 if(IS_TOPLEVEL_PROJECT)
 
-    # Set install path (relative path only)
-    set(INSTALL_INCLUDE_DIR include)
-    set(INSTALL_CMAKE_DIR share/${PROJECT_NAME}/cmake)
-    set(INSTALL_DOC_DIR share/doc/${PROJECT_NAME})
+    # Set install path
+    include(GNUInstallDirs)
+    set(CMAKE_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+    set(CMAKE_INSTALL_FULL_CMAKEDIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_CMAKEDIR})
+
+    # Build output directories
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
     ####################
     #  Subdirectories  #
     ####################
 
     add_subdirectory(share)
+    add_subdirectory(src)
 
     ###############
     #  Packaging  #
@@ -58,7 +66,7 @@ if(IS_TOPLEVEL_PROJECT)
     # Package include directory
     install(DIRECTORY
 	${PROJECT_INCLUDE_DIR}/
-	DESTINATION ${INSTALL_INCLUDE_DIR}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 	COMPONENT dev
     )
 

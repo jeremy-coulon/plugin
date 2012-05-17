@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(MyPlugin CXX)
+
+find_package(Boost REQUIRED)
+find_package(Versionning REQUIRED)
+
+include_directories(
+    ${Plugin_INCLUDE_DIR}
+    ${Versionning_INCLUDE_DIR}
+    ${Boost_INCLUDE_DIR}
+)
+
+add_library(${PROJECT_NAME}
+    SHARED
+    ${PROJECT_SOURCE_DIR}/src/MyPlugin.cpp
+    ${PROJECT_SOURCE_DIR}/src/MyPlugin.h
+)
