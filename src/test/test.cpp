@@ -8,6 +8,7 @@
 //==  Plugin  ==
 //==============
 #include "Plugin/PluginLoader.h"
+#include "Plugin/IPlugin.h"
 
 //=============
 //==  Boost  ==
@@ -37,11 +38,11 @@ BOOST_AUTO_TEST_CASE(Nominal)
 
     // Check plugin name
     std::string expectedName("Example");
-    BOOST_CHECK_EQUAL(plugin->getPluginName(), expectedName);
+    BOOST_CHECK_EQUAL(plugin->iGetPluginName(), expectedName);
 
     // Check plugin version
     Vers::Version expectedVersion(1, 3, 4, 2);
-    BOOST_CHECK_EQUAL(plugin->getPluginVersion(), expectedVersion);
+    BOOST_CHECK_EQUAL(plugin->iGetPluginVersion(), expectedVersion);
 
     // Unload plugin
     BOOST_CHECK(loader.unload());

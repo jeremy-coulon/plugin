@@ -8,6 +8,7 @@
 //==  Plugin  ==
 //==============
 #include "Plugin/PluginLoader.h"
+#include "Plugin/IPlugin.h"
 
 //===========
 //==  STD  ==
@@ -38,12 +39,13 @@ int main(int argc, char** argv)
 
     if(plugin)
     {
-        std::cout << "Plugin name    = " << plugin->getPluginName() << std::endl;
-        std::cout << "Plugin version = " << plugin->getPluginVersion() << std::endl;
+        std::cout << "Plugin name    = " << plugin->iGetPluginName() << std::endl;
+        std::cout << "Plugin version = " << plugin->iGetPluginVersion() << std::endl;
     }
     else
     {
         std::cout << "Failed to load plugin = " << pluginPath << std::endl;
+        std::cout << "Reason = " << loader.getErrorMsg() << std::endl;
     }
 
     return 0;

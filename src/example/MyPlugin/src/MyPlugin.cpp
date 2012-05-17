@@ -22,12 +22,12 @@ MyPlugin::~MyPlugin()
 
 }
 
-const std::string& MyPlugin::getPluginName() const
+const std::string& MyPlugin::iGetPluginName() const
 {
     return name_;
 }
 
-const Vers::Version& MyPlugin::getPluginVersion() const
+const Vers::Version& MyPlugin::iGetPluginVersion() const
 {
     return version_;
 }

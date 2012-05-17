@@ -8,11 +8,6 @@
 
 #pragma once
 
-//==============
-//==  Plugin  ==
-//==============
-#include "Plugin/ExportAPI.h"
-
 //===================
 //==  Versionning  ==
 //===================
@@ -21,7 +16,7 @@
 //=============
 //==  Boost  ==
 //=============
-#include <boost/utility.hpp>
+#include <boost/noncopyable.hpp>
 
 //===========
 //==  STD  ==
@@ -40,10 +35,10 @@ namespace Plugin
     {
     public:
         /// Get plugin name
-        virtual const std::string& getPluginName() const = 0;
+        virtual const std::string& iGetPluginName() const = 0;
 
         /// Get plugin version
-        virtual const Vers::Version& getPluginVersion() const = 0;
+        virtual const Vers::Version& iGetPluginVersion() const = 0;
 
     protected:
         /// Destructor
@@ -53,39 +48,4 @@ namespace Plugin
           */
         virtual ~IPlugin() {}
     };
-}
-
-/// Declare fonctions to create and destroy your plugin facade.
-/**
-  * Must be used in a header file, in the global namespace.
-  * @param T It is the concrete type of your plugin facade. T is not required to be in the global namespace.
-  */
-#define PLUGIN_FACTORY_DECLARATION(T)               \
-extern "C"                                          \
-{                                                   \
-PLUGIN_API T* createPluginFacade();                 \
-PLUGIN_API void destroyPluginFacade();              \
-}
-
-/// Defines fonctions to create and destroy your plugin facade.
-/**
-  * Must be used in a cpp file.
-  * Your plugin facade will behave as a singleton.
-  * @param T It is the concrete type of your plugin facade. T is not required to be in the global namespace.
-  */
-#define PLUGIN_FACTORY_DEFINITION(T)    \
-T* globalInstance = NULL;               \
-T* createPluginFacade()                 \
-{                                       \
-    if(!globalInstance)                 \
-        globalInstance = new T();       \
-    return globalInstance;              \
-}                                       \
-void destroyPluginFacade()              \
-{                                       \
-    if(globalInstance)                  \
-    {                                   \
-        delete globalInstance;          \
-        globalInstance = NULL;          \
-    }                                   \
 }

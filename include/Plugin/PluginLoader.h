@@ -19,15 +19,17 @@
   * @li on Windows, a plugin has a '.dll' extension. Note that most DLLs are not plugins. A DLL must be designed specifically to be a plugin.
   * @li on Linux, a plugin usually has a '.so' extension. Note that most .so libraries are not plugins. A library must be designed specifically to be a plugin.
   *
-  * This library is a header-only library. That means you don't need to compile anything to use it in your own project. You can just write :
-  * @code
-  * #include <Plugin/PluginLoader.h>
-  * @endcode
-  *
   * This library provides a Plugin::IPlugin interface which can be used as a base interface for your own plugins.\n
   * You may create your specific plugin interface that inherits from Plugin::IPlugin.\n
   * Plugin::IPlugin interface depends on the 3rd party Versionning project (https://gitorious.org/cppversionning).\n
   * However, the use of Plugin::IPlugin is not mandatory and you can use the class Plugin::PluginLoader with your own provided interface type.
+  *
+  * @section Installation
+  *
+  * This library is a header-only library. That means you don't need to compile anything to use it in your own project. You can just write :
+  * @code
+  * #include <Plugin/PluginLoader.h>
+  * @endcode
   *
   * @section License
   *
@@ -36,7 +38,37 @@
   *   (See accompanying file <a href="../LICENSE_1_0.txt">LICENSE_1_0.txt</a> or copy at\n
   *         http://www.boost.org/LICENSE_1_0.txt)
   *
-  * @section Examples
+  * @section Example
+  *
+  * First, create your plugin as a classic dynamic library.\n
+  * The following plugin example contains only one class: MyPlugin.\n
+  * Your class must inherits from an interface.\n
+  * Here we inherits from Plugin::IPlugin but you can write your own interface that may (or may not) inherits from Plugin::IPlugin as well.\n
+  * One important thing to don't forget here is to call the macro PLUGIN_FACTORY_DECLARATION(T).\n
+  * It creates factory methods that can be called from outside of your dynamic library.\n
+  * This factory implements a Singleton design pattern. There will be only one instance of MyClass during execution of the program.\n
+  * \include MyPlugin.h
+  *
+  * Implementation of MyClass is straightforward.\n
+  * The only important thing is to call the macro PLUGIN_FACTORY_DEFINITION(T).\n
+  * \include MyPlugin.cpp
+  *
+  * Now let's see how to load your newly created plugin.\n
+  * In the following code sample, we create an executable that takes the plugin path as an argument.\n
+  * You first need to instantiate a Plugin::PluginLoader.\n
+  * It takes your interface type as a template argument and the plugin path as a constructor argument.\n
+  * Then, call Plugin::PluginLoader::load() method to actually load in memory your dynamic library.\n
+  * At this time, MyPlugin class is not instantiated yet.\n
+  * You have to call Plugin::PluginLoader::getPluginInterfaceInstance() to create the Singleton instance of MyPlugin.\n
+  * It returns a pointer to your plugin interface type.\n
+  *
+  * And that's all. You can now call any method defined in your interface.\n
+  *
+  * \note Beware that Plugin::PluginLoader::getPluginInterfaceInstance() method does not give you ownership of Plugin::IPlugin pointer.\n
+  * It means that this instance will be destroyed as soon as Plugin::PluginLoader is destroyed.\n
+  * Any call to the Plugin::IPlugin pointer after Plugin::PluginLoader has been destroyed leads to undefined behavior.\n
+  *
+  * \include main.cpp
   *
   */
 
@@ -45,7 +77,7 @@
 //==============
 //==  Plugin  ==
 //==============
-#include "Plugin/IPlugin.h"
+#include "Plugin/PluginFactory.h"
 
 //=============
 //==  Boost  ==
@@ -139,7 +171,7 @@ namespace Plugin
             {
                 if(plugin_)
                 {
-                    callFunction<void>("destroyPluginFacade");
+                    callFunction<void>(PLUGIN_FACTORY_DESTROY);
                     plugin_ = NULL;
                 }
                 res = unloadLibrary();
@@ -168,7 +200,7 @@ namespace Plugin
             if(!isLoaded())
                 return NULL;
             if(!plugin_)
-                plugin_ = callFunction<T*>("createPluginFacade");
+                plugin_ = callFunction<T*>(PLUGIN_FACTORY_CREATE);
             return plugin_;
         }
 

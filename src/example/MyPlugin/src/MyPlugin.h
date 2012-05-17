@@ -8,6 +8,7 @@
 //==  Plugin  ==
 //==============
 #include "Plugin/IPlugin.h"
+#include "Plugin/PluginFactory.h"
 
 namespace Example
 {
@@ -21,8 +22,8 @@ namespace Example
 
         /// IPlugin interface implementation
         ///@{
-        virtual const std::string& getPluginName() const;
-        virtual const Vers::Version& getPluginVersion() const;
+        virtual const std::string& iGetPluginName() const;
+        virtual const Vers::Version& iGetPluginVersion() const;
         ///@}
 
     protected:
@@ -31,5 +32,5 @@ namespace Example
     };
 }
 
-/// Declare plugin factory. Must be in the global namespace.
+// Declare plugin factory. Must be in the global namespace.
 PLUGIN_FACTORY_DECLARATION( Example::MyPlugin )
