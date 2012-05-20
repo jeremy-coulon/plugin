@@ -4,10 +4,15 @@ You can just write :
 
 #include <Plugin/PluginLoader.h>
 
-If you want to generate doxygen documentation, go through the following steps:
+--------
 
 *) If you have not alread done so, download source code at https://gitorious.org/cppplugin
 *) In the following steps $SOURCE_DIR refers to your local copy of the project
+
+--------
+
+If you want to generate doxygen documentation, go through the following steps:
+
 *) cd $SOURCE_DIR
 *) mkdir build
 *) cd build
@@ -16,10 +21,38 @@ If you want to generate doxygen documentation, go through the following steps:
 
 Documentation is now available in $SOURCE_DIR/build/share/doc/html/index.html
 
-After generating documentation, if you want to generate a package with both documentation and source code, type
+--------
+
+If you want to build examples, go through the following steps:
+
+*) cd $SOURCE_DIR
+*) mkdir build
+*) cd build
+*) cmake -DPlugin_BUILD_EXAMPLE:BOOL=TRUE ..
+*) make
+
+Examples are now available in $SOURCE_DIR/build/bin
+
+--------
+
+If you want to build tests, go through the following steps:
+
+*) cd $SOURCE_DIR
+*) mkdir build
+*) cd build
+*) cmake -DPlugin_BUILD_TEST:BOOL=TRUE -DPlugin_BUILD_EXAMPLE:BOOL=TRUE ..
+*) make
+
+Note that you need to build examples in order to build and execute tests correctly.
+Tests are now available in $SOURCE_DIR/build/bin
+
+--------
+
+Then, if you want to generate a package, go through the following steps:
 
 *) cd $SOURCE_DIR/build
 *) make package
 
 An archive file is now available in the current directory.
 For example Plugin_v0.0.1.0.tar.gz.
+Note that if you have built the documentation, it will be automatically included in the package.

@@ -6,6 +6,7 @@
 
 #include "MyPlugin.h"
 
+// The only important thing is to call the macro PLUGIN_FACTORY_DEFINITION(T).
 // Define plugin factory. Must be in the global namespace.
 PLUGIN_FACTORY_DEFINITION( Example::MyPlugin )
 

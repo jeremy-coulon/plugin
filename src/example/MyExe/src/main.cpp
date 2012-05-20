@@ -27,15 +27,24 @@ int main(int argc, char** argv)
     // Path to the plugin we want to load
     std::string pluginPath(argv[1]);
 
-    // Instantiate a loader
+    // You first need to instantiate a Plugin::PluginLoader.
+    // It takes your interface type as a template argument and the plugin path as a constructor argument.
     Plugin::PluginLoader<Plugin::IPlugin> loader(pluginPath);
     Plugin::IPlugin* plugin = NULL;
 
-    // Load library in memory
+    // Then, call Plugin::PluginLoader::load() method to actually load in memory your dynamic library.
     bool isLoaded = loader.load();
+    // At this time, MyPlugin class is not instantiated yet.
     if(isLoaded)
-        // Create plugin facade instance
+        // You have to call Plugin::PluginLoader::getPluginInterfaceInstance() to create the Singleton instance of MyPlugin.
+        // It returns a pointer to your plugin interface type.
         plugin = loader.getPluginInterfaceInstance();
+
+    // Beware that Plugin::PluginLoader::getPluginInterfaceInstance() method does not give you ownership of Plugin::IPlugin pointer.
+    // It means that this instance will be destroyed as soon as Plugin::PluginLoader is destroyed.
+    // Any call to the Plugin::IPlugin pointer after Plugin::PluginLoader has been destroyed leads to undefined behavior.
+
+    // And that's all. You can now call any method defined in your interface.
 
     if(plugin)
     {

@@ -41,36 +41,21 @@
   *   (See accompanying file <a href="../LICENSE_1_0.txt">LICENSE_1_0.txt</a> or copy at\n
   *         http://www.boost.org/LICENSE_1_0.txt)
   *
-  * @section Example
-  *
+  * @example MyPlugin.h
   * First, create your plugin project as a classic dynamic library.\n
   * The following plugin example contains only one class: MyPlugin.\n
-  * Your class must inherits from an interface.\n
-  * Here we inherits from Plugin::IPlugin but you can write your own interface that may (or may not) inherits from Plugin::IPlugin as well.\n
-  * One important thing to don't forget here is to call the macro PLUGIN_FACTORY_DECLARATION(T).\n
-  * It creates factory methods that can be called from outside of your dynamic library.\n
-  * This factory implements a Singleton design pattern. There will be only one instance of MyPlugin during execution of the program.\n
-  * \include MyPlugin.h
+  * See @ref MyPlugin.cpp for MyPlugin class implementation.
   *
-  * Implementation of MyPlugin is straightforward.\n
-  * The only important thing is to call the macro PLUGIN_FACTORY_DEFINITION(T).\n
-  * \include MyPlugin.cpp
+  * @example MyPlugin.cpp
+  * Implementation of MyPlugin class is straightforward.\n
+  * See @ref MyPlugin.h for MyPlugin class declaration.
   *
+  * @example main.cpp
   * Now let's see how to load your newly created plugin.\n
   * In the following code sample, we create an executable that takes the plugin path as an argument.\n
-  * You first need to instantiate a Plugin::PluginLoader.\n
-  * It takes your interface type as a template argument and the plugin path as a constructor argument.\n
-  * Then, call Plugin::PluginLoader::load() method to actually load in memory your dynamic library.\n
-  * At this time, MyPlugin class is not instantiated yet.\n
-  * You have to call Plugin::PluginLoader::getPluginInterfaceInstance() to create the Singleton instance of MyPlugin.\n
-  * It returns a pointer to your plugin interface type.\n
   *
-  * And that's all. You can now call any method defined in your interface.\n
-  * \include main.cpp
-  *
-  * \note Beware that Plugin::PluginLoader::getPluginInterfaceInstance() method does not give you ownership of Plugin::IPlugin pointer.\n
-  * It means that this instance will be destroyed as soon as Plugin::PluginLoader is destroyed.\n
-  * Any call to the Plugin::IPlugin pointer after Plugin::PluginLoader has been destroyed leads to undefined behavior.\n
+  * \warning On Linux platform, in order to build an executable (or library) that can dynamically load a plugin you must link your executable (or library) with libdl.so.\n
+  * On Windows platform, you don't need to do anything particular.
   *
   * If you built the provided example from source (using CMake), you can try it by going to build directory and running the following command : \n
   * On Linux 64 bits platform :
@@ -103,9 +88,9 @@ Plugin version = 1.3.4.2
 #include <string>
 
 //=======================
-//==  Specific OS SDK  ==
+//==  OS Specific SDK  ==
 //=======================
-#ifdef WIN32
+#ifdef _WIN32
 #include <Windows.h>
 #else
 #include <dlfcn.h>
@@ -114,17 +99,6 @@ Plugin version = 1.3.4.2
 /// Namespace of the Plugin library
 namespace Plugin
 {
-
-#ifdef WIN32
-    typedef HMODULE library_handle;
-    typedef FARPROC generic_function_ptr;
-#else
-    /// an OS specific type that represents a library handle.
-    typedef void * library_handle;
-    /// an OS specific type that represents a function pointer.
-    typedef void * generic_function_ptr;
-#endif
-
     /// Loader of a concrete plugin
     /**
       * @tparam T Interface type of the concrete plugin
@@ -228,11 +202,24 @@ namespace Plugin
 
     private:
 
+#ifdef _WIN32
+    /// an OS specific type that represents a library handle.
+    typedef HMODULE library_handle;
+    /// an OS specific type that represents a function pointer.
+    typedef FARPROC generic_function_ptr;
+#else
+    /// an OS specific type that represents a library handle.
+    typedef void * library_handle;
+    /// an OS specific type that represents a function pointer.
+    typedef void * generic_function_ptr;
+#endif
+
 #ifdef _MSC_VER
 # pragma warning (push)
 # pragma warning (disable: 4191)    // 'reinterpret_cast' : unsafe conversion from 'Plugin::generic_function_ptr' to 'void (__decl*)(void)'
 #endif
 
+        /// Call without any argument the function "function_name" that is exported by the loaded plugin.
         template<class R>
         R callFunction(const char* function_name)
         {
@@ -242,20 +229,11 @@ namespace Plugin
             return (*func)();
         }
 
-        template<class R, class Arg1>
-        R callFunction(const char* function_name, Arg1 arg1)
-        {
-            R (*func)(Arg1);
-            func = reinterpret_cast<R (*)(Arg1)>(getFunction(function_name));
-            assert(func);
-            return (*func)(arg1);
-        }
-
 #ifdef _MSC_VER
 # pragma warning (pop)
 #endif
 
-#ifdef WIN32
+#ifdef _WIN32
         bool loadLibrary()
         {
             libHandle_ = LoadLibraryA(name_.c_str());
@@ -303,8 +281,11 @@ namespace Plugin
         }
 #endif
 
+        /// Name or path of the plugin
         std::string name_;
+        /// Pointer to the plugin facade
         T* plugin_;
+        /// OS specific library handle
         library_handle libHandle_;
     };
 }

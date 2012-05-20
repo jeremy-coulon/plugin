@@ -12,19 +12,21 @@
 
 namespace Example
 {
+    // Your class must inherits from an interface.
+    // Here we inherits from Plugin::IPlugin but you can write your own interface that may (or may not) inherits from Plugin::IPlugin as well.
     class MyPlugin : public Plugin::IPlugin
     {
     public:
-        /// Constructor
+        // Constructor
         MyPlugin();
-        /// Destructor
+        // Destructor
         virtual ~MyPlugin();
 
-        /// IPlugin interface implementation
-        ///@{
+        // IPlugin interface implementation
+        //@{
         virtual const std::string& iGetPluginName() const;
         virtual const Vers::Version& iGetPluginVersion() const;
-        ///@}
+        //@}
 
     protected:
         std::string name_;
@@ -32,5 +34,8 @@ namespace Example
     };
 }
 
+// One important thing to don't forget here is to call the macro PLUGIN_FACTORY_DECLARATION(T).
+// It creates factory methods that can be called from outside of your dynamic library.
+// This factory implements a Singleton design pattern. There will be only one instance of MyPlugin during execution of the program.
 // Declare plugin factory. Must be in the global namespace.
 PLUGIN_FACTORY_DECLARATION( Example::MyPlugin )
