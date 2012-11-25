@@ -79,7 +79,7 @@ Plugin version = 1.3.4.2
 //=============
 //==  Boost  ==
 //=============
-#include <boost/utility.hpp>
+#include <boost/noncopyable.hpp>
 
 //===========
 //==  STD  ==
@@ -104,7 +104,7 @@ namespace Plugin
       * @tparam T Interface type of the concrete plugin
       */
     template<class T>
-    class PluginLoader : public boost::noncopyable
+    class PluginLoader : boost::noncopyable
     {
     public:
         /// Constructor

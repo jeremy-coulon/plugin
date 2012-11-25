@@ -31,7 +31,7 @@ namespace Plugin
       * You are supposed to inherit and implement this interface in your plugin facade.
       * Your facade factory should be created using the macro PLUGIN_FACTORY_DECLARATION(T) and PLUGIN_FACTORY_DEFINITION(T).
       */
-    class IPlugin : public boost::noncopyable
+    class IPlugin : boost::noncopyable
     {
     public:
         /// Get plugin name
