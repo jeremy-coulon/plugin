@@ -4,6 +4,7 @@ project(MyPlugin CXX)
 
 find_package(Boost REQUIRED)
 find_package(Versionning REQUIRED)
+mark_as_advanced(Boost_DIR)
 
 include_directories(
     ${Plugin_INCLUDE_DIR}
