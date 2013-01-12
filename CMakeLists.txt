@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_LIST_DIR}/DefaultBuildFlags.cmake)
 
-project(Plugin CXX)
+project(Plugin NONE)
 
 #############
 #  Sources  #
@@ -70,6 +70,8 @@ if(IS_TOPLEVEL_PROJECT)
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 	COMPONENT dev
     )
+
+    mark_as_advanced(CMAKE_INSTALL_PREFIX)
 
     ###########
     #  CPack  #
