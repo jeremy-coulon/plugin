@@ -1,3 +1,6 @@
 [submodule "cmake/cmake-tools"]
 	path = cmake/cmake-tools
 	url = git@github.com:jeremy-coulon/cmake-tools.git
+[submodule "share/doc/quickbook"]
+	path = share/doc/quickbook
+	url = git@github.com:jeremy-coulon/quickbook.git

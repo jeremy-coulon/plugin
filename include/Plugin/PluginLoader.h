@@ -4,70 +4,7 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
-/**
-  * @file
-  *
-  * @mainpage
-  * @author Jeremy Coulon
-  * @date 2012
-  *
-  * @section Introduction
-  *
-  * This library provides a portable way of loading/unloading a C++ plugin.\n
-  * The name 'plugin' refers to a dynamic library that is optional and can be loaded and unloaded at runtime.\n
-  * Depending on OS, a plugin may have a different filename extension :
-  * @li on Windows, a plugin has a '.dll' extension. Note that most DLLs are not plugins. A DLL must be designed specifically to be a plugin.
-  * @li on Linux, a plugin usually has a '.so' extension. Note that most .so libraries are not plugins. A library must be designed specifically to be a plugin.
-  *
-  * \warning On Linux platform, in order to build an executable (or library) that can dynamically load a plugin you must link your executable (or library) with libdl.so.\n
-  * On Windows platform, you don't need to do anything particular.
-  *
-  * This library provides a Plugin::IPlugin interface which can be used as a base interface for your own plugins.\n
-  * You may create your specific plugin interface that inherits from Plugin::IPlugin.\n
-  * Plugin::IPlugin interface depends on the 3rd party Versionning project (https://gitorious.org/cppversionning).\n
-  * However, the use of Plugin::IPlugin is not mandatory and you can use the class Plugin::PluginLoader with your own provided interface type.
-  *
-  * @section Installation
-  *
-  * This library is a header-only library. That means you don't need to compile anything to use it in your own project. You can just write :
-  * @code
-  * #include <Plugin/PluginLoader.h>
-  * @endcode
-  *
-  * @section License
-  *
-  *          Copyright Jeremy Coulon 2012.\n
-  * Distributed under the Boost Software License, Version 1.0.\n
-  *   (See accompanying file <a href="../LICENSE_1_0.txt">LICENSE_1_0.txt</a> or copy at\n
-  *         http://www.boost.org/LICENSE_1_0.txt)
-  *
-  * @example MyPlugin.h
-  * First, create your plugin project as a classic dynamic library.\n
-  * The following plugin example contains only one class: MyPlugin.\n
-  * See @ref MyPlugin.cpp for MyPlugin class implementation.
-  *
-  * @example MyPlugin.cpp
-  * Implementation of MyPlugin class is straightforward.\n
-  * See @ref MyPlugin.h for MyPlugin class declaration.
-  *
-  * @example main.cpp
-  * Now let's see how to load your newly created plugin.\n
-  * In the following code sample, we create an executable that takes the plugin path as an argument.\n
-  *
-  * \warning On Linux platform, in order to build an executable (or library) that can dynamically load a plugin you must link your executable (or library) with libdl.so.\n
-  * On Windows platform, you don't need to do anything particular.
-  *
-  * If you built the provided example from source (using CMake), you can try it by going to build directory and running the following command : \n
-  * On Linux 64 bits platform :
-  * \verbatim ./bin/MyExe ./lib/x86_64-linux-gnu/libMyPlugin.so \endverbatim
-  * On Windows Visual Studio 2010 32 bits platform :
-  * \verbatim .\bin\MyExe.exe .\lib\x86-windows-vc100\MyPlugin.dll \endverbatim
-  * Expected program output is : \n
-  \verbatim
-Plugin name    = Example
-Plugin version = 1.3.4.2
-  \endverbatim
-  */
+/** @file */
 
 #pragma once
 
@@ -203,14 +140,14 @@ namespace Plugin
     private:
 
 #ifdef _WIN32
-    /// an OS specific type that represents a library handle.
+    // an OS specific type that represents a library handle.
     typedef HMODULE library_handle;
-    /// an OS specific type that represents a function pointer.
+    // an OS specific type that represents a function pointer.
     typedef FARPROC generic_function_ptr;
 #else
-    /// an OS specific type that represents a library handle.
+    // an OS specific type that represents a library handle.
     typedef void * library_handle;
-    /// an OS specific type that represents a function pointer.
+    // an OS specific type that represents a function pointer.
     typedef void * generic_function_ptr;
 #endif
 
@@ -219,7 +156,7 @@ namespace Plugin
 # pragma warning (disable: 4191)    // 'reinterpret_cast' : unsafe conversion from 'Plugin::generic_function_ptr' to 'void (__decl*)(void)'
 #endif
 
-        /// Call without any argument the function "function_name" that is exported by the loaded plugin.
+        // Call without any argument the function "function_name" that is exported by the loaded plugin.
         template<class R>
         R callFunction(const char* function_name)
         {
@@ -281,11 +218,11 @@ namespace Plugin
         }
 #endif
 
-        /// Name or path of the plugin
+        // Name or path of the plugin
         std::string name_;
-        /// Pointer to the plugin facade
+        // Pointer to the plugin facade
         T* plugin_;
-        /// OS specific library handle
+        // OS specific library handle
         library_handle libHandle_;
     };
 }

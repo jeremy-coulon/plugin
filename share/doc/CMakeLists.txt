@@ -7,48 +7,72 @@ cmake_minimum_required(VERSION 2.8)
 # Generate VERSION.txt
 file(WRITE
     ${CMAKE_CURRENT_BINARY_DIR}/VERSION.txt
-    "${PROJECT_NAME} v${${PROJECT_NAME}_VERSION}"
+    "${PROJECT_NAME} v${${PROJECT_NAME}_VERSION}\n"
 )
 
 option(${PROJECT_NAME}_BUILD_DOC "Generate API documentation with Doxygen" OFF)
 if(${PROJECT_NAME}_BUILD_DOC)
+    find_package(BoostBook REQUIRED)
+    find_package(QuickBook REQUIRED)
+    find_package(XSLTPROC REQUIRED)
     find_package(Doxygen REQUIRED)
-    # Copy license file to test generated documentation
-    file(COPY ${PROJECT_SOURCE_DIR}/LICENSE_1_0.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/quickbook)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doxygen)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/boostbook)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docbook)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html)
+    # Copy css and image files to test generated documentation
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/quickbook/css/boostbook.css DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/html)
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/quickbook/images DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/html FILES_MATCHING PATTERN *.png)
     # Generate Doxyfile
     configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+        ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+        ${CMAKE_CURRENT_BINARY_DIR}/doxygen/Doxyfile
         @ONLY
     )
-    # Doxygen target
+    # Generate plugin.qbk
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/plugin.qbk
+        ${CMAKE_CURRENT_BINARY_DIR}/plugin.qbk
+        @ONLY
+    )
+    # Custom target to generate both Doxygen and QuickBook HTML documentation
     add_custom_target(
         ${PROJECT_NAME}_DOCUMENTATION
-        ALL
-        COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+        COMMAND ${QUICKBOOK_EXECUTABLE} --output-file ${CMAKE_CURRENT_BINARY_DIR}/quickbook/quickbook.xml ${CMAKE_CURRENT_BINARY_DIR}/plugin.qbk
+        COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_CURRENT_BINARY_DIR}/doxygen/xml/*.xml
+        COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxygen/Doxyfile
+        COMMAND ${XSLTPROC_EXECUTABLE} --stringparam doxygen.xml.path ${CMAKE_CURRENT_BINARY_DIR}/doxygen/xml --xinclude -o ${CMAKE_CURRENT_BINARY_DIR}/boostbook/doxygen.xml ${BOOSTBOOK_XSL_DIR}/doxygen/collect.xsl ${CMAKE_CURRENT_BINARY_DIR}/doxygen/xml/index.xml
+        COMMAND ${XSLTPROC_EXECUTABLE} --stringparam boost.doxygen.header.prefix "Plugin" --xinclude -o ${CMAKE_CURRENT_BINARY_DIR}/boostbook/boostbook.xml ${BOOSTBOOK_XSL_DIR}/doxygen/doxygen2boostbook.xsl ${CMAKE_CURRENT_BINARY_DIR}/boostbook/doxygen.xml
+        COMMAND ${XSLTPROC_EXECUTABLE} --stringparam boost.root "../../../../include" --xinclude -o ${CMAKE_CURRENT_BINARY_DIR}/docbook/docbook.xml ${BOOSTBOOK_XSL_DIR}/docbook.xsl ${CMAKE_CURRENT_BINARY_DIR}/quickbook/quickbook.xml
+        COMMAND ${XSLTPROC_EXECUTABLE} --stringparam boost.root "../../../../include" --xinclude -o ${CMAKE_CURRENT_BINARY_DIR}/html/ ${BOOSTBOOK_XSL_DIR}/html.xsl ${CMAKE_CURRENT_BINARY_DIR}/docbook/docbook.xml
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Generating API documentation with Doxygen"
+        COMMENT "Generating QuickBook documentation"
         VERBATIM
-        SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in.cmake
+        SOURCES
+            ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+            ${CMAKE_CURRENT_SOURCE_DIR}/plugin.qbk
     )
 endif()
 
 ###############
 #  Packaging  #
 ###############
-
-install(FILES
-    ${PROJECT_SOURCE_DIR}/LICENSE_1_0.txt
-    ${PROJECT_SOURCE_DIR}/README.txt
-    ${PROJECT_SOURCE_DIR}/INSTALL.txt
-    ${CMAKE_CURRENT_BINARY_DIR}/VERSION.txt
-    DESTINATION ${CMAKE_INSTALL_DOCDIR}
-    COMPONENT doc
-)
-if(${PROJECT_NAME}_BUILD_DOC)
-    install(DIRECTORY
-        ${CMAKE_CURRENT_BINARY_DIR}/html
+if(${PROJECT_NAME}_PACKAGING_ENABLED)
+    install(FILES
+        ${PROJECT_SOURCE_DIR}/LICENSE_1_0.txt
+        ${PROJECT_SOURCE_DIR}/README.txt
+        ${PROJECT_SOURCE_DIR}/INSTALL.txt
+        ${CMAKE_CURRENT_BINARY_DIR}/VERSION.txt
         DESTINATION ${CMAKE_INSTALL_DOCDIR}
         COMPONENT doc
     )
+    if(${PROJECT_NAME}_BUILD_DOC)
+        install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build ${CMAKE_BINARY_DIR} --target ${PROJECT_NAME}_DOCUMENTATION)")
+        install(DIRECTORY
+            ${CMAKE_CURRENT_BINARY_DIR}/html
+            DESTINATION ${CMAKE_INSTALL_DOCDIR}
+            COMPONENT doc
+        )
+    endif()
 endif()

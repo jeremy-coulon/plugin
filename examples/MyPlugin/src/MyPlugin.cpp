@@ -4,6 +4,7 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
+//[MyPlugin_cpp_file
 #include "MyPlugin.h"
 
 // The only important thing is to call the macro PLUGIN_FACTORY_DEFINITION(T).
@@ -32,3 +33,4 @@ const Vers::Version& MyPlugin::iGetPluginVersion() const
 {
     return version_;
 }
+//]

@@ -4,6 +4,7 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
+//[MyPlugin_h_file
 //==============
 //==  Plugin  ==
 //==============
@@ -39,3 +40,4 @@ namespace Example
 // This factory implements a Singleton design pattern. There will be only one instance of MyPlugin during execution of the program.
 // Declare plugin factory. Must be in the global namespace.
 PLUGIN_FACTORY_DECLARATION( Example::MyPlugin )
+//]
