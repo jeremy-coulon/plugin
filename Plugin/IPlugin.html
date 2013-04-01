@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Class IPlugin</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.2.2">
+<link rel="up" href="../plugin/reference.html#header.Plugin.IPlugin_h" title="Header &lt;Plugin/IPlugin.h&gt;">
+<link rel="prev" href="../PLUGIN_API.html" title="Macro PLUGIN_API">
+<link rel="next" href="../PLUGIN_FACTORY_CREATE.html" title="Macro PLUGIN_FACTORY_CREATE">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="../PLUGIN_API.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../plugin/reference.html#header.Plugin.IPlugin_h"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="../PLUGIN_FACTORY_CREATE.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="refentry">
+<a name="Plugin.IPlugin"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class IPlugin</span></h2>
+<p>Plugin::IPlugin &#8212; Interface of a plugin. </p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../plugin/reference.html#header.Plugin.IPlugin_h" title="Header &lt;Plugin/IPlugin.h&gt;">Plugin/IPlugin.h</a>&gt;
+
+</span>
+<span class="keyword">class</span> <a class="link" href="IPlugin.html" title="Class IPlugin">IPlugin</a> <span class="special">:</span> <span class="keyword">private</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span> <span class="special">{</span>
+<span class="keyword">public</span><span class="special">:</span>
+  <span class="comment">// <a class="link" href="IPlugin.html#Plugin.IPluginconstruct-copy-destruct">construct/copy/destruct</a></span>
+  <a class="link" href="IPlugin.html#idm36560-bb"><span class="special">~</span><span class="identifier">IPlugin</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+
+  <span class="comment">// <a class="link" href="IPlugin.html#idm39824-bb">public member functions</a></span>
+  <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a class="link" href="IPlugin.html#idm39424-bb"><span class="identifier">iGetPluginName</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="keyword">const</span> <span class="identifier">Vers</span><span class="special">::</span><span class="identifier">Version</span> <span class="special">&amp;</span> <a class="link" href="IPlugin.html#idm38176-bb"><span class="identifier">iGetPluginVersion</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+<span class="special">}</span><span class="special">;</span></pre></div>
+<div class="refsect1">
+<a name="idp5244896"></a><h2>Description</h2>
+<p>You are supposed to inherit and implement this interface in your plugin facade. Your facade factory should be created using the macro PLUGIN_FACTORY_DECLARATION(T) and PLUGIN_FACTORY_DEFINITION(T). </p>
+<div class="refsect2">
+<a name="idp5245744"></a><h3>
+<a name="Plugin.IPluginconstruct-copy-destruct"></a><code class="computeroutput">IPlugin</code> 
+        public
+       construct/copy/destruct</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+<pre class="literallayout"><a name="idm36560-bb"></a><span class="special">~</span><span class="identifier">IPlugin</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Destructor. <p>This destructor is declared protected to strictly forbid user to delete instance of a plugin facade. Construction and destruction of a plugin facade must all resides inside the boundary of the concrete plugin library. </p>
+</li></ol></div>
+</div>
+<div class="refsect2">
+<a name="idp5252288"></a><h3>
+<a name="idm39824-bb"></a><code class="computeroutput">IPlugin</code> public member functions</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a name="idm39424-bb"></a><span class="identifier">iGetPluginName</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get plugin name. </li>
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">Vers</span><span class="special">::</span><span class="identifier">Version</span> <span class="special">&amp;</span> <a name="idm38176-bb"></a><span class="identifier">iGetPluginVersion</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get plugin version. </li>
+</ol></div>
+</div>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2012, 2013 J&#233;r&#233;my Coulon<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../PLUGIN_API.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../plugin/reference.html#header.Plugin.IPlugin_h"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="../PLUGIN_FACTORY_CREATE.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
