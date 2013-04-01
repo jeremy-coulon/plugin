@@ -1,8 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_LIST_DIR}/DefaultBuildFlags.cmake)
+list(APPEND CMAKE_MODULE_PATH 
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules
+    ${CMAKE_CURRENT_LIST_DIR}/share/doc/quickbook/cmake/Modules
+)
+set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_LIST_DIR}/cmake/cmake-tools/DefaultBuildFlags.cmake)
+mark_as_advanced(CMAKE_CODEBLOCKS_EXECUTABLE)
 
 project(Plugin NONE)
+
+# Set project version
+include(version.cmake)
 
 #############
 #  Sources  #
@@ -31,44 +39,43 @@ add_custom_target(
 #  Global variables  #
 ######################
 
-# Set project version
-include(version.cmake)
-message(STATUS "${PROJECT_NAME} version: ${${PROJECT_NAME}_VERSION}")
+# Set install path
+include(GNUInstallDirs)
+set(CMAKE_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+set(CMAKE_INSTALL_FULL_CMAKEDIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_CMAKEDIR})
 
-set(IS_TOPLEVEL_PROJECT FALSE)
+# Build output directories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    set(IS_TOPLEVEL_PROJECT TRUE)
+    set(${PROJECT_NAME}_PACKAGING_ENABLED TRUE CACHE INTERNAL "")
+else()
+    set(${PROJECT_NAME}_PACKAGING_ENABLED FALSE CACHE INTERNAL "")
 endif()
 
-# Following code is enabled only if Versionning is the top level project
-if(IS_TOPLEVEL_PROJECT)
+####################
+#  Subdirectories  #
+####################
 
-    # Set install path
-    include(GNUInstallDirs)
-    set(CMAKE_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
-    set(CMAKE_INSTALL_FULL_CMAKEDIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_CMAKEDIR})
+add_subdirectory(share)
+add_subdirectory(examples)
+add_subdirectory(tests)
 
-    # Build output directories
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+###############
+#  Packaging  #
+###############
 
-    ####################
-    #  Subdirectories  #
-    ####################
-
-    add_subdirectory(share)
-    add_subdirectory(src)
-
-    ###############
-    #  Packaging  #
-    ###############
+# Following code is enabled only if Plugin is the top level project
+if(${PROJECT_NAME}_PACKAGING_ENABLED)
 
     # Package include directory
     install(DIRECTORY
 	${PROJECT_INCLUDE_DIR}/
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 	COMPONENT dev
+        PATTERN "*~" EXCLUDE
     )
 
     mark_as_advanced(CMAKE_INSTALL_PREFIX)
@@ -79,8 +86,10 @@ if(IS_TOPLEVEL_PROJECT)
 
     if(WIN32)
 	set(CPACK_GENERATOR "ZIP")
+        set(CPACK_SOURCE_GENERATOR "ZIP")
     elseif(UNIX)
 	set(CPACK_GENERATOR "TGZ")
+        set(CPACK_SOURCE_GENERATOR "TGZ")
     endif()
     set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Portable C++ library which can load/unload dynamic libraries at runtime.")
     set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE_1_0.txt")
@@ -88,7 +97,9 @@ if(IS_TOPLEVEL_PROJECT)
     set(CPACK_PACKAGE_VERSION_MINOR ${${PROJECT_NAME}_MINOR})
     set(CPACK_PACKAGE_VERSION_PATCH ${${PROJECT_NAME}_PATCH})
     set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}_v${${PROJECT_NAME}_VERSION}")
+    set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-src_v${${PROJECT_NAME}_VERSION}")
+    set(CPACK_SOURCE_IGNORE_FILES "/build/;/install/;CMakeLists.txt.user;.git;.gitignore;.gitmodules;~$")
 
     include(CPack)
 
-endif(IS_TOPLEVEL_PROJECT)
+endif()
