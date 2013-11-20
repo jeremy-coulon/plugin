@@ -54,7 +54,7 @@ namespace Plugin
           * path will be relative to the current working directory.
           * @param name Filename of the concrete plugin
           */
-        PluginLoader(const std::string& name)
+        PluginLoader(const std::string& name = "")
             : name_(name), plugin_(NULL), libHandle_(0)
         {
 
@@ -79,6 +79,8 @@ namespace Plugin
         {
             if (isLoaded())
                 unload();
+            if (name_.empty())
+                return false;
             return loadLibrary();
         }
 
@@ -139,6 +141,24 @@ namespace Plugin
         std::string getErrorMsg() const
         {
             return getErrorMsgImpl();
+        }
+
+        /**
+         * @brief Get the plugin filename
+         * @return filename of the concrete plugin
+         */
+        const std::string& getPluginName() const
+        {
+            return name_;
+        }
+
+        /**
+         * @brief Set the plugin filename
+         * @param name filename of the concrete plugin
+         */
+        void setPluginName(const std::string& name)
+        {
+            name_ = name;
         }
 
     private:
