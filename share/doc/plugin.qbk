@@ -29,7 +29,7 @@ This library provides a Plugin::IPlugin interface which can be used as a base in
 
 You may create your specific plugin interface that inherits from Plugin::IPlugin.
 
-Plugin::IPlugin interface depends on the 3rd party Versionning project (https://github.com/jeremy-coulon/versionning).
+Plugin::IPlugin interface depends on the 3rd party Versionning project ([@https://github.com/jeremy-coulon/versionning]).
 
 However, the use of Plugin::IPlugin is not mandatory and you can use the class Plugin::PluginLoader with your own provided interface type.
 
@@ -45,9 +45,9 @@ This library is a header-only library. That means you don't need to compile anyt
 
 [section Examples]
 
-[import @PROJECT_SOURCE_DIR@/examples/MyPlugin/src/MyPlugin.h]
-[import @PROJECT_SOURCE_DIR@/examples/MyPlugin/src/MyPlugin.cpp]
-[import @PROJECT_SOURCE_DIR@/examples/MyExe/src/main.cpp]
+[import @PROJECT_SOURCE_DIR@/examples/PluginExample/src/MyPlugin.h]
+[import @PROJECT_SOURCE_DIR@/examples/PluginExample/src/MyPlugin.cpp]
+[import @PROJECT_SOURCE_DIR@/examples/PluginLoaderExample/src/main.cpp]
 
 First, create your plugin project as a classic dynamic library.
 
@@ -66,11 +66,11 @@ If you built the provided example from source (using CMake), you can try it by g
 
 * On Linux 64 bits platform :
 [pre
-./bin/MyExe ./lib/x86_64-linux-gnu/libMyPlugin.so
+./bin/PluginLoaderExample ./lib/x86_64-linux-gnu/libPluginExample.so
 ]
 * On Windows Visual Studio 2010 32 bits platform :
 [pre
-.\bin\MyExe.exe .\lib\x86-windows-vc100\MyPlugin.dll
+.\bin\PluginLoaderExample.exe .\lib\x86-windows-vc100\PluginExample.dll
 ]
 
 Expected program output is :
