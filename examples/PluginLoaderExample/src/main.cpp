@@ -1,5 +1,4 @@
-
-//          Copyright Jeremy Coulon 2012.
+//          Copyright Jeremy Coulon 2012-2013.
 // Distributed under the Boost Software License, Version 1.0.
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
@@ -19,7 +18,7 @@
 int main(int argc, char** argv)
 {
     // Check program arguments
-    if(argc != 2)
+    if (argc != 2)
     {
         std::cout << "Usage: " << argv[0] << " ./path/myPlugin.<ext>" << std::endl;
         return 0;
@@ -36,7 +35,7 @@ int main(int argc, char** argv)
     // Then, call Plugin::PluginLoader::load() method to actually load in memory your dynamic library.
     bool isLoaded = loader.load();
     // At this time, MyPlugin class is not instantiated yet.
-    if(isLoaded)
+    if (isLoaded)
         // You have to call Plugin::PluginLoader::getPluginInterfaceInstance() to create the Singleton instance of MyPlugin.
         // It returns a pointer to your plugin interface type.
         plugin = loader.getPluginInterfaceInstance();
@@ -47,7 +46,7 @@ int main(int argc, char** argv)
 
     // And that's all. You can now call any method defined in your interface.
 
-    if(plugin)
+    if (plugin)
     {
         std::cout << "Plugin name    = " << plugin->iGetPluginName() << std::endl;
         std::cout << "Plugin version = " << plugin->iGetPluginVersion() << std::endl;
