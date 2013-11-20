@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(Nominal)
 
     // Create plugin facade
     Plugin::IPlugin* plugin = NULL;
-    plugin = loader.getPluginInterfaceInstance();
+    plugin = loader.getPluginInstance();
     BOOST_REQUIRE(plugin);
 
     // Check plugin name
@@ -58,6 +58,6 @@ BOOST_AUTO_TEST_CASE(PluginNotFound)
 
     // Create plugin facade
     Plugin::IPlugin* plugin = NULL;
-    plugin = loader.getPluginInterfaceInstance();
+    plugin = loader.getPluginInstance();
     BOOST_CHECK(!plugin);
 }

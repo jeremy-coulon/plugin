@@ -36,9 +36,9 @@ int main(int argc, char** argv)
     bool isLoaded = loader.load();
     // At this time, MyPlugin class is not instantiated yet.
     if (isLoaded)
-        // You have to call Plugin::PluginLoader::getPluginInterfaceInstance() to create the Singleton instance of MyPlugin.
+        // You have to call Plugin::PluginLoader::getPluginInstance() to create the Singleton instance of MyPlugin.
         // It returns a pointer to your plugin interface type.
-        plugin = loader.getPluginInterfaceInstance();
+        plugin = loader.getPluginInstance();
 
     // Beware that Plugin::PluginLoader::getPluginInterfaceInstance() method does not give you ownership of Plugin::IPlugin pointer.
     // It means that this instance will be destroyed as soon as Plugin::PluginLoader is destroyed.

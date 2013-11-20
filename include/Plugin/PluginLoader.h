@@ -124,7 +124,7 @@ namespace Plugin
           * if it is not already created.
           * @return a valid pointer if the plugin is loaded. NULL otherwise.
           */
-        T* getPluginInterfaceInstance()
+        T* getPluginInstance()
         {
             if (!isLoaded())
                 return NULL;
