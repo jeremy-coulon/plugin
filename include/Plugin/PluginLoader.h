@@ -78,7 +78,7 @@ namespace Plugin
           */
         bool load()
         {
-            if(isLoaded())
+            if (isLoaded())
                 unload();
             return loadLibrary();
         }
@@ -92,15 +92,15 @@ namespace Plugin
         bool unload()
         {
             bool res = true;
-            if(isLoaded())
+            if (isLoaded())
             {
-                if(plugin_)
+                if (plugin_)
                 {
                     callFunction<void>(PLUGIN_FACTORY_DESTROY);
                     plugin_ = NULL;
                 }
                 res = unloadLibrary();
-                if(res)
+                if (res)
                     libHandle_ = 0;
             }
             return res;
@@ -123,9 +123,9 @@ namespace Plugin
           */
         T* getPluginInterfaceInstance()
         {
-            if(!isLoaded())
+            if (!isLoaded())
                 return NULL;
-            if(!plugin_)
+            if (!plugin_)
                 plugin_ = callFunction<T*>(PLUGIN_FACTORY_CREATE);
             return plugin_;
         }
@@ -221,7 +221,7 @@ namespace Plugin
         {
             std::string result;
             char* str = dlerror();
-            if(str)
+            if (str)
                 result = str;
             return result;
         }

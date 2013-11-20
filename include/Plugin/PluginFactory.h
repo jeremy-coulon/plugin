@@ -43,13 +43,13 @@ PLUGIN_API void destroyPluginFacade();              \
 T* globalInstance = NULL;               \
 T* createPluginFacade()                 \
 {                                       \
-    if(!globalInstance)                 \
+    if (!globalInstance)                 \
         globalInstance = new T();       \
     return globalInstance;              \
 }                                       \
 void destroyPluginFacade()              \
 {                                       \
-    if(globalInstance)                  \
+    if (globalInstance)                  \
     {                                   \
         delete globalInstance;          \
         globalInstance = NULL;          \
