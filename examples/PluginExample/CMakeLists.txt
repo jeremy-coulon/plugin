@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(MyPlugin CXX)
+project(PluginExample CXX)
 
 find_package(Boost REQUIRED)
 mark_as_advanced(Boost_DIR)

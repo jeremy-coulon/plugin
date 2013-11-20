@@ -4,11 +4,9 @@ option(Plugin_BUILD_EXAMPLE "Build examples" OFF)
 
 if(Plugin_BUILD_EXAMPLE)
 
-    project(PluginExample CXX)
+    add_subdirectory(PluginExample)
+    add_subdirectory(PluginLoaderExample)
 
-    add_subdirectory(MyPlugin)
-    add_subdirectory(MyExe)
+    add_dependencies(PluginLoaderExample PluginExample)
 
-    add_dependencies(MyExe MyPlugin)
-    
 endif()
