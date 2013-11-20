@@ -9,7 +9,7 @@
 #pragma once
 
 /**
-  *  @def PLUGIN_API Used to defines a fonction of a dynamic library to be part of the exported library interface.
+  *  @def PLUGIN_API Used to define exported library interface.
   */
 
 #ifdef WIN32

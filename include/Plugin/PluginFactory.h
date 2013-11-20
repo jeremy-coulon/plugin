@@ -22,7 +22,8 @@
 /// Declare fonctions to create and destroy your plugin facade.
 /**
   * Must be used in a header file, in the global namespace.
-  * @param T It is the concrete type of your plugin facade. T is not required to be in the global namespace.
+  * @param T It is the concrete type of your plugin facade.
+  *        T is not required to be in the global namespace.
   */
 #define PLUGIN_FACTORY_DECLARATION(T)               \
 extern "C"                                          \
@@ -35,7 +36,8 @@ PLUGIN_API void destroyPluginFacade();              \
 /**
   * Must be used in a cpp file.
   * Your plugin facade will behave as a singleton.
-  * @param T It is the concrete type of your plugin facade. T is not required to be in the global namespace.
+  * @param T It is the concrete type of your plugin facade.
+  *        T is not required to be in the global namespace.
   */
 #define PLUGIN_FACTORY_DEFINITION(T)    \
 T* globalInstance = NULL;               \

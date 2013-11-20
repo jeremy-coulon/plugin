@@ -47,7 +47,8 @@ namespace Plugin
         /// Constructor
         /**
           * If you give only a filename without any directory information,
-          * it will look for a matching library in the current working directory and in directories included in the PATH environment variable.
+          * it will look for a matching library in the current working directory
+          * and in directories included in the PATH environment variable.
           * If you give an absolute path to a file,
           * it will consider this name to be the plugin library.
           * If you give a relative path to a file,
@@ -71,7 +72,8 @@ namespace Plugin
 
         /// Load the plugin
         /**
-          * This method only load the dynamic library in memory. It does not instantiate the plugin facade.
+          * This method only load the dynamic library in memory.
+          * It does not instantiate the plugin facade.
           * @return True on success. False otherwise.
           */
         bool load()
@@ -115,7 +117,8 @@ namespace Plugin
 
         /// Get a pointer to the plugin interface
         /**
-          * Note that this method instanciate the plugin facade singleton if it is not already created.
+          * Note that this method instanciate the plugin facade singleton
+          * if it is not already created.
           * @return a valid pointer if the plugin is loaded. NULL otherwise.
           */
         T* getPluginInterfaceInstance()
@@ -129,8 +132,10 @@ namespace Plugin
 
         /// Get error message
         /**
-          * If any of the PluginLoader methods returns false. You can call this method to get an explanation of the error.
-          * Please note that the behavior of this method is OS specific. Some OS may return an empty error message.
+          * If any of the PluginLoader methods returns false,
+          * you can call this method to get an explanation of the error.
+          * Please note that the behavior of this method is OS specific.
+          * Some OS may return an empty error message.
           */
         std::string getErrorMsg() const
         {
@@ -153,10 +158,14 @@ namespace Plugin
 
 #ifdef _MSC_VER
 # pragma warning (push)
-# pragma warning (disable: 4191)    // 'reinterpret_cast' : unsafe conversion from 'Plugin::generic_function_ptr' to 'void (__decl*)(void)'
+// 'reinterpret_cast': unsafe conversion
+// from 'Plugin::generic_function_ptr'
+// to 'void (__decl*)(void)'
+# pragma warning (disable: 4191)
 #endif
 
-        // Call without any argument the function "function_name" that is exported by the loaded plugin.
+        // Call without any argument the function "function_name"
+        // that is exported by the loaded plugin.
         template<class R>
         R callFunction(const char* function_name)
         {
