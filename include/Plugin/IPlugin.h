@@ -31,7 +31,7 @@ namespace Plugin
       * Your facade factory should be created using the macro
       * PLUGIN_FACTORY_DECLARATION(T) and PLUGIN_FACTORY_DEFINITION(T).
       */
-    class IPlugin : boost::noncopyable
+    class IPlugin : private boost::noncopyable
     {
     public:
         /// Get plugin name

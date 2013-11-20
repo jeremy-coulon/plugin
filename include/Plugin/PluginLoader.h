@@ -40,7 +40,7 @@ namespace Plugin
       * @tparam T Interface type of the concrete plugin
       */
     template<class T>
-    class PluginLoader : boost::noncopyable
+    class PluginLoader : private boost::noncopyable
     {
     public:
         /// Constructor
