@@ -3,8 +3,11 @@ cmake_minimum_required(VERSION 2.8)
 project(MyPlugin CXX)
 
 find_package(Boost REQUIRED)
-find_package(Versionning REQUIRED)
 mark_as_advanced(Boost_DIR)
+
+if(NOT TARGET Versionning)
+    find_package(Versionning REQUIRED)
+endif()
 
 include_directories(
     ${Plugin_INCLUDE_DIR}

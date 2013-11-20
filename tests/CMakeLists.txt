@@ -5,7 +5,7 @@ include(CMakeDependentOption)
 CMAKE_DEPENDENT_OPTION(Plugin_BUILD_TEST
     "Build tests"
     OFF
-    "Plugin_BUILD_EXAMPLE" 
+    "Plugin_BUILD_EXAMPLE"
     OFF
 )
 
@@ -14,7 +14,9 @@ if(Plugin_BUILD_TEST)
     project(PluginTest CXX)
 
     find_package(Boost REQUIRED unit_test_framework filesystem system)
-    find_package(Versionning REQUIRED)
+    if(NOT TARGET Versionning)
+        find_package(Versionning REQUIRED)
+    endif()
 
     if(NOT TARGET MyPlugin)
         message(FATAL_ERROR "Plugin_BUILD_EXAMPLE must be enabled in order to execute tests.")
