@@ -55,9 +55,9 @@ namespace Plugin
           * @param name Filename of the concrete plugin
           */
         PluginLoader(const std::string& name = "")
-            : name_(name)
-            , plugin_(NULL)
-            , libHandle_(0)
+            : name_(name),
+              plugin_(NULL),
+              libHandle_(0)
         {
             // Empty
         }
