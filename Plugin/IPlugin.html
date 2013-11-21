@@ -3,8 +3,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Class IPlugin</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
-<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.2.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.3.0">
 <link rel="up" href="../plugin/reference.html#header.Plugin.IPlugin_h" title="Header &lt;Plugin/IPlugin.h&gt;">
 <link rel="prev" href="../PLUGIN_API.html" title="Macro PLUGIN_API">
 <link rel="next" href="../PLUGIN_FACTORY_CREATE.html" title="Macro PLUGIN_FACTORY_CREATE">
@@ -26,32 +26,32 @@
 <span class="keyword">class</span> <a class="link" href="IPlugin.html" title="Class IPlugin">IPlugin</a> <span class="special">:</span> <span class="keyword">private</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span> <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// <a class="link" href="IPlugin.html#Plugin.IPluginconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <a class="link" href="IPlugin.html#idm36560-bb"><span class="special">~</span><span class="identifier">IPlugin</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="IPlugin.html#idp30461872-bb"><span class="special">~</span><span class="identifier">IPlugin</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="IPlugin.html#idm39824-bb">public member functions</a></span>
-  <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a class="link" href="IPlugin.html#idm39424-bb"><span class="identifier">iGetPluginName</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
-  <span class="keyword">const</span> <span class="identifier">Vers</span><span class="special">::</span><span class="identifier">Version</span> <span class="special">&amp;</span> <a class="link" href="IPlugin.html#idm38176-bb"><span class="identifier">iGetPluginVersion</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="IPlugin.html#idp30458608-bb">public member functions</a></span>
+  <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a class="link" href="IPlugin.html#idp30459008-bb"><span class="identifier">iGetPluginName</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="keyword">const</span> <span class="identifier">Vers</span><span class="special">::</span><span class="identifier">Version</span> <span class="special">&amp;</span> <a class="link" href="IPlugin.html#idp30460256-bb"><span class="identifier">iGetPluginVersion</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idp5244896"></a><h2>Description</h2>
+<a name="idp86502208"></a><h2>Description</h2>
 <p>You are supposed to inherit and implement this interface in your plugin facade. Your facade factory should be created using the macro PLUGIN_FACTORY_DECLARATION(T) and PLUGIN_FACTORY_DEFINITION(T). </p>
 <div class="refsect2">
-<a name="idp5245744"></a><h3>
+<a name="idp86503056"></a><h3>
 <a name="Plugin.IPluginconstruct-copy-destruct"></a><code class="computeroutput">IPlugin</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-<pre class="literallayout"><a name="idm36560-bb"></a><span class="special">~</span><span class="identifier">IPlugin</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Destructor. <p>This destructor is declared protected to strictly forbid user to delete instance of a plugin facade. Construction and destruction of a plugin facade must all resides inside the boundary of the concrete plugin library. </p>
+<pre class="literallayout"><a name="idp30461872-bb"></a><span class="special">~</span><span class="identifier">IPlugin</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Destructor. <p>This destructor is declared protected in order to strictly forbid user to delete instance of a plugin facade. Construction and destruction of a plugin facade must all resides inside the boundary of the concrete plugin library. </p>
 </li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idp5252288"></a><h3>
-<a name="idm39824-bb"></a><code class="computeroutput">IPlugin</code> public member functions</h3>
+<a name="idp86509600"></a><h3>
+<a name="idp30458608-bb"></a><code class="computeroutput">IPlugin</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a name="idm39424-bb"></a><span class="identifier">iGetPluginName</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get plugin name. </li>
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a name="idp30459008-bb"></a><span class="identifier">iGetPluginName</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get plugin name. </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">Vers</span><span class="special">::</span><span class="identifier">Version</span> <span class="special">&amp;</span> <a name="idm38176-bb"></a><span class="identifier">iGetPluginVersion</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get plugin version. </li>
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">Vers</span><span class="special">::</span><span class="identifier">Version</span> <span class="special">&amp;</span> <a name="idp30460256-bb"></a><span class="identifier">iGetPluginVersion</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get plugin version. </li>
 </ol></div>
 </div>
 </div>

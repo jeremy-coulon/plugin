@@ -3,9 +3,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Examples</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
-<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.2.2">
-<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.2.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.3.0">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.3.0">
 <link rel="prev" href="installation.html" title="Installation">
 <link rel="next" href="reference.html" title="Reference">
 </head>
@@ -77,14 +77,15 @@
 <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="identifier">Example</span><span class="special">;</span>
 
 <span class="identifier">MyPlugin</span><span class="special">::</span><span class="identifier">MyPlugin</span><span class="special">()</span>
-    <span class="special">:</span> <span class="identifier">name_</span><span class="special">(</span><span class="string">"Example"</span><span class="special">),</span> <span class="identifier">version_</span><span class="special">(</span><span class="number">1</span><span class="special">,</span> <span class="number">3</span><span class="special">,</span> <span class="number">4</span><span class="special">,</span> <span class="number">2</span><span class="special">)</span>
+    <span class="special">:</span> <span class="identifier">name_</span><span class="special">(</span><span class="string">"Example"</span><span class="special">)</span>
+    <span class="special">,</span> <span class="identifier">version_</span><span class="special">(</span><span class="number">1</span><span class="special">,</span> <span class="number">3</span><span class="special">,</span> <span class="number">4</span><span class="special">,</span> <span class="number">2</span><span class="special">)</span>
 <span class="special">{</span>
-
+    <span class="comment">// Empty</span>
 <span class="special">}</span>
 
 <span class="identifier">MyPlugin</span><span class="special">::~</span><span class="identifier">MyPlugin</span><span class="special">()</span>
 <span class="special">{</span>
-
+    <span class="comment">// Empty</span>
 <span class="special">}</span>
 
 <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">&amp;</span> <span class="identifier">MyPlugin</span><span class="special">::</span><span class="identifier">iGetPluginName</span><span class="special">()</span> <span class="keyword">const</span>
@@ -122,7 +123,7 @@
 <span class="keyword">int</span> <span class="identifier">main</span><span class="special">(</span><span class="keyword">int</span> <span class="identifier">argc</span><span class="special">,</span> <span class="keyword">char</span><span class="special">**</span> <span class="identifier">argv</span><span class="special">)</span>
 <span class="special">{</span>
     <span class="comment">// Check program arguments</span>
-    <span class="keyword">if</span><span class="special">(</span><span class="identifier">argc</span> <span class="special">!=</span> <span class="number">2</span><span class="special">)</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">argc</span> <span class="special">!=</span> <span class="number">2</span><span class="special">)</span>
     <span class="special">{</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Usage: "</span> <span class="special">&lt;&lt;</span> <span class="identifier">argv</span><span class="special">[</span><span class="number">0</span><span class="special">]</span> <span class="special">&lt;&lt;</span> <span class="string">" ./path/myPlugin.&lt;ext&gt;"</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
         <span class="keyword">return</span> <span class="number">0</span><span class="special">;</span>
@@ -139,10 +140,10 @@
     <span class="comment">// Then, call Plugin::PluginLoader::load() method to actually load in memory your dynamic library.</span>
     <span class="keyword">bool</span> <span class="identifier">isLoaded</span> <span class="special">=</span> <span class="identifier">loader</span><span class="special">.</span><span class="identifier">load</span><span class="special">();</span>
     <span class="comment">// At this time, MyPlugin class is not instantiated yet.</span>
-    <span class="keyword">if</span><span class="special">(</span><span class="identifier">isLoaded</span><span class="special">)</span>
-        <span class="comment">// You have to call Plugin::PluginLoader::getPluginInterfaceInstance() to create the Singleton instance of MyPlugin.</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">isLoaded</span><span class="special">)</span>
+        <span class="comment">// You have to call Plugin::PluginLoader::getPluginInstance() to create the Singleton instance of MyPlugin.</span>
         <span class="comment">// It returns a pointer to your plugin interface type.</span>
-        <span class="identifier">plugin</span> <span class="special">=</span> <span class="identifier">loader</span><span class="special">.</span><span class="identifier">getPluginInterfaceInstance</span><span class="special">();</span>
+        <span class="identifier">plugin</span> <span class="special">=</span> <span class="identifier">loader</span><span class="special">.</span><span class="identifier">getPluginInstance</span><span class="special">();</span>
 
     <span class="comment">// Beware that Plugin::PluginLoader::getPluginInterfaceInstance() method does not give you ownership of Plugin::IPlugin pointer.</span>
     <span class="comment">// It means that this instance will be destroyed as soon as Plugin::PluginLoader is destroyed.</span>
@@ -150,7 +151,7 @@
 
     <span class="comment">// And that's all. You can now call any method defined in your interface.</span>
 
-    <span class="keyword">if</span><span class="special">(</span><span class="identifier">plugin</span><span class="special">)</span>
+    <span class="keyword">if</span> <span class="special">(</span><span class="identifier">plugin</span><span class="special">)</span>
     <span class="special">{</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Plugin name    = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">plugin</span><span class="special">-&gt;</span><span class="identifier">iGetPluginName</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
         <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"Plugin version = "</span> <span class="special">&lt;&lt;</span> <span class="identifier">plugin</span><span class="special">-&gt;</span><span class="identifier">iGetPluginVersion</span><span class="special">()</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
@@ -170,19 +171,19 @@
       If you built the provided example from source (using CMake), you can try it
       by going to build directory and running the following command:
     </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
           <p>
             On Linux 64 bits platform :
           </p>
-<pre class="programlisting">./bin/MyExe ./lib/x86_64-linux-gnu/libMyPlugin.so
+<pre class="programlisting">./bin/PluginLoaderExample ./lib/x86_64-linux-gnu/libPluginExample.so
 </pre>
         </li>
 <li class="listitem">
           <p>
             On Windows Visual Studio 2010 32 bits platform :
           </p>
-<pre class="programlisting">.\bin\MyExe.exe .\lib\x86-windows-vc100\MyPlugin.dll
+<pre class="programlisting">.\bin\PluginLoaderExample.exe .\lib\x86-windows-vc100\PluginExample.dll
 </pre>
         </li>
 </ul></div>
