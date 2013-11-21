@@ -4,7 +4,7 @@
 <title>Class template PluginLoader</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.3.0">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Plugin 0.0.3.1">
 <link rel="up" href="../plugin/reference.html#header.Plugin.PluginLoader_h" title="Header &lt;Plugin/PluginLoader.h&gt;">
 <link rel="prev" href="../PLUGIN_FACTORY_DEFINITION.html" title="Macro PLUGIN_FACTORY_DEFINITION">
 </head>
@@ -25,44 +25,44 @@
 <span class="keyword">class</span> <a class="link" href="PluginLoader.html" title="Class template PluginLoader">PluginLoader</a> <span class="special">:</span> <span class="keyword">private</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">noncopyable</span> <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// <a class="link" href="PluginLoader.html#Plugin.PluginLoaderconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <a class="link" href="PluginLoader.html#idp30489136-bb"><span class="identifier">PluginLoader</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <span class="special">=</span> <span class="string">""</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="PluginLoader.html#idp30491744-bb"><span class="special">~</span><span class="identifier">PluginLoader</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="PluginLoader.html#idp26777056-bb"><span class="identifier">PluginLoader</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <span class="special">=</span> <span class="string">""</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="PluginLoader.html#idp26779664-bb"><span class="special">~</span><span class="identifier">PluginLoader</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="PluginLoader.html#idp30472688-bb">public member functions</a></span>
-  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp30473088-bb"><span class="identifier">load</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp30475264-bb"><span class="identifier">unload</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp30477456-bb"><span class="identifier">isLoaded</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
-  <span class="identifier">T</span> <span class="special">*</span> <a class="link" href="PluginLoader.html#idp30479520-bb"><span class="identifier">getPluginInstance</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="PluginLoader.html#idp30481664-bb"><span class="identifier">getErrorMsg</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
-  <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a class="link" href="PluginLoader.html#idp30484224-bb"><span class="identifier">getPluginName</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
-  <span class="keyword">void</span> <a class="link" href="PluginLoader.html#idp30486336-bb"><span class="identifier">setPluginName</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="PluginLoader.html#idp26760608-bb">public member functions</a></span>
+  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp26761008-bb"><span class="identifier">load</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp26763184-bb"><span class="identifier">unload</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp26765376-bb"><span class="identifier">isLoaded</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="identifier">T</span> <span class="special">*</span> <a class="link" href="PluginLoader.html#idp26767440-bb"><span class="identifier">getPluginInstance</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="PluginLoader.html#idp26769584-bb"><span class="identifier">getErrorMsg</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a class="link" href="PluginLoader.html#idp26772144-bb"><span class="identifier">getPluginName</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="keyword">void</span> <a class="link" href="PluginLoader.html#idp26774256-bb"><span class="identifier">setPluginName</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="PluginLoader.html#idp30492592-bb">private member functions</a></span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> R<span class="special">&gt;</span> <span class="identifier">R</span> <a class="link" href="PluginLoader.html#idp30493008-bb"><span class="identifier">callFunction</span></a><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp30495504-bb"><span class="identifier">loadLibrary</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp30496464-bb"><span class="identifier">unloadLibrary</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-  <span class="identifier">generic_function_ptr</span> <a class="link" href="PluginLoader.html#idm2931120-bb"><span class="identifier">getFunction</span></a><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
-  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="PluginLoader.html#idm2929472-bb"><span class="identifier">getErrorMsgImpl</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="PluginLoader.html#idp26780512-bb">private member functions</a></span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> R<span class="special">&gt;</span> <span class="identifier">R</span> <a class="link" href="PluginLoader.html#idp26780928-bb"><span class="identifier">callFunction</span></a><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp26783424-bb"><span class="identifier">loadLibrary</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="PluginLoader.html#idp26784384-bb"><span class="identifier">unloadLibrary</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <span class="identifier">generic_function_ptr</span> <a class="link" href="PluginLoader.html#idp38039792-bb"><span class="identifier">getFunction</span></a><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="PluginLoader.html#idp38041440-bb"><span class="identifier">getErrorMsgImpl</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="idp86635888"></a><h2>Description</h2>
+<a name="idp86541936"></a><h2>Description</h2>
 <p>
 </p>
 <div class="refsect2">
-<a name="idp86636528"></a><h3>Template Parameters</h3>
+<a name="idp86542576"></a><h3>Template Parameters</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
 <pre class="literallayout"><span class="keyword">typename</span> T</pre>
 <p>Interface type of the concrete plugin </p>
 </li></ol></div>
 </div>
 <div class="refsect2">
-<a name="idp86639392"></a><h3>
+<a name="idp86545440"></a><h3>
 <a name="Plugin.PluginLoaderconstruct-copy-destruct"></a><code class="computeroutput">PluginLoader</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-<pre class="literallayout"><a name="idp30489136-bb"></a><span class="identifier">PluginLoader</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> name <span class="special">=</span> <span class="string">""</span><span class="special">)</span><span class="special">;</span></pre>Constructor. <p>If you give only a filename without any directory information, it will look for a matching library in the current working directory and in directories included in the PATH environment variable. If you give an absolute path to a file, it will consider this name to be the plugin library. If you give a relative path to a file, path will be relative to the current working directory. 
+<pre class="literallayout"><a name="idp26777056-bb"></a><span class="identifier">PluginLoader</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> name <span class="special">=</span> <span class="string">""</span><span class="special">)</span><span class="special">;</span></pre>Constructor. <p>If you give only a filename without any directory information, it will look for a matching library in the current working directory and in directories included in the PATH environment variable. If you give an absolute path to a file, it will consider this name to be the plugin library. If you give a relative path to a file, path will be relative to the current working directory. 
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -85,16 +85,16 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><a name="idp30491744-bb"></a><span class="special">~</span><span class="identifier">PluginLoader</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Destructor. <p>Unloads the plugin if necessary. </p>
+<pre class="literallayout"><a name="idp26779664-bb"></a><span class="special">~</span><span class="identifier">PluginLoader</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Destructor. <p>Unloads the plugin if necessary. </p>
 </li>
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idp86655968"></a><h3>
-<a name="idp30472688-bb"></a><code class="computeroutput">PluginLoader</code> public member functions</h3>
+<a name="idp86562016"></a><h3>
+<a name="idp26760608-bb"></a><code class="computeroutput">PluginLoader</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">bool</span> <a name="idp30473088-bb"></a><span class="identifier">load</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Load the plugin. <p>This method only load the dynamic library in memory. It does not instantiate the plugin facade. 
+<pre class="literallayout"><span class="keyword">bool</span> <a name="idp26761008-bb"></a><span class="identifier">load</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Load the plugin. <p>This method only load the dynamic library in memory. It does not instantiate the plugin facade. 
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -108,7 +108,7 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">bool</span> <a name="idp30475264-bb"></a><span class="identifier">unload</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Unload the plugin. <p>If the plugin facade is instanciated, it is destroyed. Then the dynamic library is unloaded from memory. 
+<pre class="literallayout"><span class="keyword">bool</span> <a name="idp26763184-bb"></a><span class="identifier">unload</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Unload the plugin. <p>If the plugin facade is instanciated, it is destroyed. Then the dynamic library is unloaded from memory. 
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -122,7 +122,7 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">bool</span> <a name="idp30477456-bb"></a><span class="identifier">isLoaded</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Check if the plugin is loaded. <p>
+<pre class="literallayout"><span class="keyword">bool</span> <a name="idp26765376-bb"></a><span class="identifier">isLoaded</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Check if the plugin is loaded. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -136,7 +136,7 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="identifier">T</span> <span class="special">*</span> <a name="idp30479520-bb"></a><span class="identifier">getPluginInstance</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Get a pointer to the plugin interface. <p>Note that this method instanciate the plugin facade singleton if it is not already created. 
+<pre class="literallayout"><span class="identifier">T</span> <span class="special">*</span> <a name="idp26767440-bb"></a><span class="identifier">getPluginInstance</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre>Get a pointer to the plugin interface. <p>Note that this method instanciate the plugin facade singleton if it is not already created. 
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -150,10 +150,10 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="idp30481664-bb"></a><span class="identifier">getErrorMsg</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get error message. <p>If any of the <code class="computeroutput"><a class="link" href="PluginLoader.html" title="Class template PluginLoader">PluginLoader</a></code> methods returns false, you can call this method to get an explanation of the error. Please note that the behavior of this method is OS specific. Some OS may return an empty error message. </p>
+<pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="idp26769584-bb"></a><span class="identifier">getErrorMsg</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get error message. <p>If any of the <code class="computeroutput"><a class="link" href="PluginLoader.html" title="Class template PluginLoader">PluginLoader</a></code> methods returns false, you can call this method to get an explanation of the error. Please note that the behavior of this method is OS specific. Some OS may return an empty error message. </p>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a name="idp30484224-bb"></a><span class="identifier">getPluginName</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get the plugin filename. <p>
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <a name="idp26772144-bb"></a><span class="identifier">getPluginName</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>Get the plugin filename. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -167,7 +167,7 @@
 </table></div>
 </li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">void</span> <a name="idp30486336-bb"></a><span class="identifier">setPluginName</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> name<span class="special">)</span><span class="special">;</span></pre>Set the plugin filename. <p>
+<pre class="literallayout"><span class="keyword">void</span> <a name="idp26774256-bb"></a><span class="identifier">setPluginName</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> name<span class="special">)</span><span class="special">;</span></pre>Set the plugin filename. <p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist compact">
 <colgroup>
@@ -192,14 +192,14 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="idp86706576"></a><h3>
-<a name="idp30492592-bb"></a><code class="computeroutput">PluginLoader</code> private member functions</h3>
+<a name="idp86612624"></a><h3>
+<a name="idp26780512-bb"></a><code class="computeroutput">PluginLoader</code> private member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> R<span class="special">&gt;</span> <span class="identifier">R</span> <a name="idp30493008-bb"></a><span class="identifier">callFunction</span><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> function_name<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="idp30495504-bb"></a><span class="identifier">loadLibrary</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="idp30496464-bb"></a><span class="identifier">unloadLibrary</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><span class="identifier">generic_function_ptr</span> <a name="idm2931120-bb"></a><span class="identifier">getFunction</span><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> function_name<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="idm2929472-bb"></a><span class="identifier">getErrorMsgImpl</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> R<span class="special">&gt;</span> <span class="identifier">R</span> <a name="idp26780928-bb"></a><span class="identifier">callFunction</span><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> function_name<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="idp26783424-bb"></a><span class="identifier">loadLibrary</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="idp26784384-bb"></a><span class="identifier">unloadLibrary</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="identifier">generic_function_ptr</span> <a name="idp38039792-bb"></a><span class="identifier">getFunction</span><span class="special">(</span><span class="keyword">const</span> <span class="keyword">char</span> <span class="special">*</span> function_name<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="idp38041440-bb"></a><span class="identifier">getErrorMsgImpl</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 </div>
