@@ -54,7 +54,7 @@ namespace Plugin
           * path will be relative to the current working directory.
           * @param name Filename of the concrete plugin
           */
-        PluginLoader(const std::string& name = "")
+        explicit PluginLoader(const std::string& name = "")
             : name_(name),
               plugin_(NULL),
               libHandle_(0)
