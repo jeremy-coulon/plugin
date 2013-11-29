@@ -5,7 +5,6 @@ list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_LIST_DIR}/share/doc/quickbook/cmake/Modules
 )
 set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_LIST_DIR}/cmake/cmake-tools/DefaultBuildFlags.cmake)
-mark_as_advanced(CMAKE_CODEBLOCKS_EXECUTABLE)
 
 project(Plugin NONE)
 
@@ -78,8 +77,6 @@ if(${PROJECT_NAME}_PACKAGING_ENABLED)
         PATTERN "*~" EXCLUDE
     )
 
-    mark_as_advanced(CMAKE_INSTALL_PREFIX)
-
     ###########
     #  CPack  #
     ###########
@@ -105,3 +102,9 @@ if(${PROJECT_NAME}_PACKAGING_ENABLED)
     include(CPack)
 
 endif()
+
+mark_as_advanced(
+    CMAKE_CODEBLOCKS_EXECUTABLE
+    CMAKE_CONFIGURATION_TYPES
+    CMAKE_INSTALL_PREFIX
+)
