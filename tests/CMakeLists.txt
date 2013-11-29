@@ -27,9 +27,13 @@ if(Plugin_BUILD_TEST)
     #  Sources  #
     #############
 
+    set(PROJECT_SRC_DIR
+        ${PROJECT_SOURCE_DIR}/src
+    )
+
     set(PROJECT_FILES
-        ${PROJECT_SOURCE_DIR}/main.cpp
-        ${PROJECT_SOURCE_DIR}/test.cpp
+        ${PROJECT_SRC_DIR}/main.cpp
+        ${PROJECT_SRC_DIR}/test.cpp
     )
 
     #######################
