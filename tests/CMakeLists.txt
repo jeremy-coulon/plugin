@@ -1,25 +1,20 @@
 cmake_minimum_required(VERSION 2.8)
 
-include(CMakeDependentOption)
-
-CMAKE_DEPENDENT_OPTION(Plugin_BUILD_TEST
-    "Build tests"
-    OFF
-    "Plugin_BUILD_EXAMPLE"
-    OFF
-)
+option(Plugin_BUILD_TEST "Build tests" OFF)
 
 if(Plugin_BUILD_TEST)
 
     project(TestPlugin CXX)
 
+    ##################
+    #  Dependencies  #
+    ##################
+
     find_package(Boost REQUIRED unit_test_framework filesystem system)
-    if(NOT TARGET Versionning)
-        find_package(Versionning REQUIRED)
-    endif()
+    mark_as_advanced(Boost_DIR)
 
     if(NOT TARGET PluginExample)
-        message(FATAL_ERROR "Plugin_BUILD_EXAMPLE must be enabled in order to execute tests.")
+        message(FATAL_ERROR "Target not found: PluginExample")
     endif()
 
     get_target_property(
@@ -28,10 +23,18 @@ if(Plugin_BUILD_TEST)
         LOCATION
     )
 
-    set(${PROJECT_NAME}_FILES
+    #############
+    #  Sources  #
+    #############
+
+    set(PROJECT_FILES
         ${PROJECT_SOURCE_DIR}/main.cpp
         ${PROJECT_SOURCE_DIR}/test.cpp
     )
+
+    #######################
+    #  Compilation flags  #
+    #######################
 
     include_directories(
         ${Plugin_INCLUDE_DIR}
@@ -44,7 +47,11 @@ if(Plugin_BUILD_TEST)
         -DMYPLUGIN_PATH="${PluginExample_LOCATION}"
     )
 
-    add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_FILES})
+    ############
+    #  Target  #
+    ############
+
+    add_executable(${PROJECT_NAME} ${PROJECT_FILES})
 
     target_link_libraries(${PROJECT_NAME}
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
@@ -54,5 +61,14 @@ if(Plugin_BUILD_TEST)
     )
 
     add_dependencies(${PROJECT_NAME} PluginExample)
+
+    ###############
+    #  Packaging  #
+    ###############
+
+    install(
+        TARGETS ${PROJECT_NAME}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT test
+    )
 
 endif()

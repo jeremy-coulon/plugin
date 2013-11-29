@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-list(APPEND CMAKE_MODULE_PATH 
+list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_CURRENT_LIST_DIR}/cmake/Modules
     ${CMAKE_CURRENT_LIST_DIR}/share/doc/quickbook/cmake/Modules
 )
@@ -72,9 +72,9 @@ if(${PROJECT_NAME}_PACKAGING_ENABLED)
 
     # Package include directory
     install(DIRECTORY
-	${PROJECT_INCLUDE_DIR}/
+        ${PROJECT_INCLUDE_DIR}/
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-	COMPONENT dev
+        COMPONENT dev
         PATTERN "*~" EXCLUDE
     )
 
@@ -85,12 +85,14 @@ if(${PROJECT_NAME}_PACKAGING_ENABLED)
     ###########
 
     if(WIN32)
-	set(CPACK_GENERATOR "ZIP")
+        set(CPACK_GENERATOR "ZIP")
         set(CPACK_SOURCE_GENERATOR "ZIP")
     elseif(UNIX)
-	set(CPACK_GENERATOR "TGZ")
+        set(CPACK_GENERATOR "TGZ")
         set(CPACK_SOURCE_GENERATOR "TGZ")
     endif()
+    set(CPACK_COMPONENTS_ALL dev doc)
+    set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
     set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Portable C++ library which can load/unload dynamic libraries at runtime.")
     set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE_1_0.txt")
     set(CPACK_PACKAGE_VERSION_MAJOR ${${PROJECT_NAME}_MAJOR})
