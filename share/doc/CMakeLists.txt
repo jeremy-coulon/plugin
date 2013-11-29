@@ -10,7 +10,7 @@ file(WRITE
     "${PROJECT_NAME} v${${PROJECT_NAME}_VERSION}\n"
 )
 
-option(${PROJECT_NAME}_BUILD_DOC "Generate API documentation with Doxygen" OFF)
+option(${PROJECT_NAME}_BUILD_DOC "Generate API documentation with Doxygen" ${BUILD_ALL})
 if(${PROJECT_NAME}_BUILD_DOC)
     find_package(BoostBook REQUIRED)
     find_package(QuickBook REQUIRED)

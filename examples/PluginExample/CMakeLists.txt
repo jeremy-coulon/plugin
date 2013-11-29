@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-option(Plugin_BUILD_PLUGIN_EXAMPLE "Build PluginExample" OFF)
+option(Plugin_BUILD_PLUGIN_EXAMPLE "Build PluginExample" ${BUILD_ALL})
 
 if(Plugin_BUILD_PLUGIN_EXAMPLE)
 
