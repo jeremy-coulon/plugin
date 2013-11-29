@@ -18,10 +18,16 @@ if(Plugin_BUILD_TEST)
     endif()
 
     get_target_property(
-        PluginExample_LOCATION
+        plugin_path
         PluginExample
         LOCATION
     )
+    get_target_property(
+        plugin_dir
+        PluginExample
+        LIBRARY_OUTPUT_DIRECTORY
+    )
+    file(RELATIVE_PATH plugin_filename ${plugin_dir} ${plugin_path})
 
     #############
     #  Sources  #
@@ -48,7 +54,7 @@ if(Plugin_BUILD_TEST)
 
     add_definitions(
         -DBOOST_TEST_DYN_LINK
-        -DMYPLUGIN_PATH="${PluginExample_LOCATION}"
+        -DMYPLUGIN_PATH="${plugin_filename}"
     )
 
     ############
@@ -62,6 +68,11 @@ if(Plugin_BUILD_TEST)
         ${Boost_FILESYSTEM_LIBRARY}
         ${Boost_SYSTEM_LIBRARY}
         ${CMAKE_DL_LIBS}
+    )
+
+    set_target_properties(${PROJECT_NAME}
+        PROPERTIES
+        BUILD_WITH_INSTALL_RPATH ON
     )
 
     add_dependencies(${PROJECT_NAME} PluginExample)

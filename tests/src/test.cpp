@@ -23,11 +23,10 @@
 BOOST_AUTO_TEST_CASE(Nominal)
 {
     boost::filesystem::path myPluginPath(MYPLUGIN_PATH);
-    BOOST_REQUIRE(boost::filesystem::exists(myPluginPath));
 
     // Load plugin
     Plugin::PluginLoader<Plugin::IPlugin> loader(myPluginPath.native());
-    BOOST_REQUIRE(loader.load());
+    BOOST_REQUIRE_MESSAGE(loader.load(), "Failed to load plugin: " << myPluginPath);
     BOOST_REQUIRE(loader.isLoaded());
 
     // Create plugin facade
