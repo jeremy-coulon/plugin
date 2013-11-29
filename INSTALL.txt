@@ -6,7 +6,7 @@ You can just write :
 
 --------
 
-*) If you have not alread done so, download source code at https://gitorious.org/cppplugin
+*) If you have not alread done so, download source code at https://github.com/jeremy-coulon/plugin.git
 *) In the following steps $SOURCE_DIR refers to your local copy of the project
 
 --------
