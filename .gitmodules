@@ -4,3 +4,6 @@
 [submodule "share/doc/quickbook"]
 	path = share/doc/quickbook
 	url = https://github.com/jeremy-coulon/quickbook.git
+[submodule "dependencies/Versionning"]
+	path = dependencies/Versionning
+	url = https://github.com/jeremy-coulon/versionning.git

@@ -14,11 +14,7 @@ if(Plugin_BUILD_PLUGIN_EXAMPLE)
     mark_as_advanced(Boost_DIR)
 
     if(NOT TARGET Versionning)
-        set(Versionning_HINT ${Plugin_SOURCE_DIR}/../Versionning/build/share/cmake)
-        find_package(Versionning
-            REQUIRED
-            PATHS ${Versionning_HINT}
-        )
+        message(FATAL_ERROR "Target not found: Versionning")
     endif()
 
     #######################

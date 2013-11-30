@@ -62,6 +62,7 @@ endif()
 #  Subdirectories  #
 ####################
 
+add_subdirectory(dependencies)
 add_subdirectory(share)
 add_subdirectory(examples)
 add_subdirectory(tests)
