@@ -92,6 +92,22 @@ if(${PROJECT_NAME}_PACKAGING_ENABLED)
     #  CPack  #
     ###########
 
+    find_package(Git)
+    if(GIT_FOUND)
+        execute_process(
+            COMMAND ${GIT_EXECUTABLE} describe --always --dirty
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE ${PROJECT_NAME}_VERSION_STRING
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+        string(FIND "${${PROJECT_NAME}_VERSION_STRING}" "${${PROJECT_NAME}_VERSION}" substring_found)
+        if(substring_found EQUAL -1)
+            message(FATAL_ERROR "Version mismatch: ${${PROJECT_NAME}_VERSION_STRING} != ${${PROJECT_NAME}_VERSION}")
+        endif()
+    else()
+        set(${PROJECT_NAME}_VERSION_STRING "v${${PROJECT_NAME}_VERSION}")
+    endif()
+
     if(WIN32)
         set(CPACK_GENERATOR "ZIP")
         set(CPACK_SOURCE_GENERATOR "ZIP")
@@ -106,8 +122,8 @@ if(${PROJECT_NAME}_PACKAGING_ENABLED)
     set(CPACK_PACKAGE_VERSION_MAJOR ${${PROJECT_NAME}_MAJOR})
     set(CPACK_PACKAGE_VERSION_MINOR ${${PROJECT_NAME}_MINOR})
     set(CPACK_PACKAGE_VERSION_PATCH ${${PROJECT_NAME}_PATCH})
-    set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}_v${${PROJECT_NAME}_VERSION}")
-    set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-src_v${${PROJECT_NAME}_VERSION}")
+    set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}_${${PROJECT_NAME}_VERSION_STRING}")
+    set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}_${${PROJECT_NAME}_VERSION_STRING}-src")
     set(CPACK_SOURCE_IGNORE_FILES "/build/;/install/;CMakeLists.txt.user;.git;.gitignore;.gitmodules;~$")
 
     include(CPack)
@@ -116,6 +132,5 @@ endif()
 
 mark_as_advanced(
     CMAKE_CODEBLOCKS_EXECUTABLE
-    CMAKE_CONFIGURATION_TYPES
     CMAKE_INSTALL_PREFIX
 )
