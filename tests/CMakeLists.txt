@@ -77,6 +77,12 @@ if(Plugin_BUILD_TEST)
 
     add_dependencies(${PROJECT_NAME} PluginExample)
 
+    #############
+    #  Testing  #
+    #############
+
+    add_test(${PROJECT_NAME} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME})
+
     ###############
     #  Packaging  #
     ###############

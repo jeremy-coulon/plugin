@@ -58,6 +58,12 @@ else()
     set(${PROJECT_NAME}_PACKAGING_ENABLED FALSE CACHE INTERNAL "")
 endif()
 
+#############
+#  Testing  #
+#############
+
+enable_testing()
+
 ####################
 #  Subdirectories  #
 ####################
