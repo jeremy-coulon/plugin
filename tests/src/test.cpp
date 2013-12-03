@@ -53,6 +53,7 @@ BOOST_AUTO_TEST_CASE(PluginNotFound)
     // Load plugin
     Plugin::PluginLoader<Plugin::IPlugin> loader(myPluginPath);
     BOOST_CHECK(!loader.load());
+    BOOST_MESSAGE(loader.getErrorMsg());
     BOOST_CHECK(!loader.isLoaded());
 
     // Create plugin facade

@@ -21,6 +21,7 @@
 //==  STD  ==
 //===========
 #include <cassert>
+#include <cstddef>
 #include <string>
 
 //=======================
@@ -140,9 +141,9 @@ namespace Plugin
           * Please note that the behavior of this method is OS specific.
           * Some OS may return an empty error message.
           */
-        std::string getErrorMsg() const
+        const std::string& getErrorMsg() const
         {
-            return getErrorMsgImpl();
+            return errorMsg_;
         }
 
         /**
@@ -216,35 +217,41 @@ namespace Plugin
         {
             return GetProcAddress(libHandle_, function_name);
         }
-
-        std::string getErrorMsgImpl() const
-        {
-            return std::string();
-        }
 #else
         bool loadLibrary()
         {
             libHandle_ = dlopen(name_.c_str(), RTLD_LAZY);
-            return libHandle_ != 0;
+            if (!libHandle_)
+                saveErrorMsg();
+            return libHandle_ != NULL;
         }
 
         bool unloadLibrary()
         {
-            return dlclose(libHandle_) == 0;
+            int res = dlclose(libHandle_);
+            if (res != 0)
+                saveErrorMsg();
+            return res == 0;
         }
 
-        generic_function_ptr getFunction(const char *function_name)
+        generic_function_ptr getFunction(const char* function_name)
         {
-            return dlsym(libHandle_, function_name);
+            void* result = dlsym(libHandle_, function_name);
+            if (!result)
+                saveErrorMsg();
+            return result;
         }
 
-        std::string getErrorMsgImpl() const
+        void saveErrorMsg()
         {
-            std::string result;
+            // Save error message
             char* str = dlerror();
             if (str)
-                result = str;
-            return result;
+                errorMsg_ = str;
+            // dlerror() must be called twice
+            // in order to avoid memory leaks
+            str = dlerror();
+            assert(!str);
         }
 #endif
 
@@ -254,5 +261,7 @@ namespace Plugin
         T* plugin_;
         // OS specific library handle
         library_handle libHandle_;
+        // Error message
+        std::string errorMsg_;
     };
 }
