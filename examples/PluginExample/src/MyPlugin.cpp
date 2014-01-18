@@ -10,26 +10,24 @@
 // Define plugin factory. Must be in the global namespace.
 PLUGIN_FACTORY_DEFINITION( Example::MyPlugin )
 
-using namespace Example;
-
-MyPlugin::MyPlugin()
+Example::MyPlugin::MyPlugin()
     : name_("Example")
     , version_(1, 3, 4, 2)
 {
     // Empty
 }
 
-MyPlugin::~MyPlugin()
+Example::MyPlugin::~MyPlugin()
 {
     // Empty
 }
 
-const std::string& MyPlugin::iGetPluginName() const
+const std::string& Example::MyPlugin::iGetPluginName() const
 {
     return name_;
 }
 
-const Vers::Version& MyPlugin::iGetPluginVersion() const
+const Vers::Version& Example::MyPlugin::iGetPluginVersion() const
 {
     return version_;
 }
