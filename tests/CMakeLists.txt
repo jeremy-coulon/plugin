@@ -17,18 +17,6 @@ if(Plugin_BUILD_TEST)
         message(FATAL_ERROR "Target not found: PluginExample")
     endif()
 
-    get_target_property(
-        plugin_path
-        PluginExample
-        LOCATION
-    )
-    get_target_property(
-        plugin_dir
-        PluginExample
-        LIBRARY_OUTPUT_DIRECTORY
-    )
-    file(RELATIVE_PATH plugin_filename ${plugin_dir} ${plugin_path})
-
     #############
     #  Sources  #
     #############
@@ -52,11 +40,6 @@ if(Plugin_BUILD_TEST)
         ${Boost_INCLUDE_DIR}
     )
 
-    add_definitions(
-        -DBOOST_TEST_DYN_LINK
-        -DMYPLUGIN_PATH="${plugin_filename}"
-    )
-
     ############
     #  Target  #
     ############
@@ -73,6 +56,11 @@ if(Plugin_BUILD_TEST)
     set_target_properties(${PROJECT_NAME}
         PROPERTIES
         BUILD_WITH_INSTALL_RPATH ON
+    )
+
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+        BOOST_TEST_DYN_LINK
+        MYPLUGIN_PATH="$<TARGET_FILE_NAME:PluginExample>"
     )
 
     add_dependencies(${PROJECT_NAME} PluginExample)
